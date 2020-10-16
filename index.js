@@ -619,3 +619,4 @@ class FunctionStructure{
         }
     }
     global.functions=FunctionStructure;
+    
