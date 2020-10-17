@@ -1,622 +1,826 @@
-const items=require("minecraft-data")("1.8.8");
-let clipboardForJava="";
-const colors={0:"#000000",1:"#0000AA",2:"#00AA00",3:"#00AAAA",4:"#AA0000",5:"#AA00AA",6:"#FFAA00",7:"#AAAAAA",8:"#555555",9:"#5555FF",a:"#55FF55",b:"#55FFFF",c:"#FF5555",d:"#FF55FF",e:"#FFFF55",f:"#FFFFFF"}, types=["Right Click","Sneak","Passive"], ability=["Item Ability","Full Set Bonus","Piece Bonus"];
-class FunctionStructure{
-    constructor(){}e(){
-        let e=items.items[document.getElementById("itemIDField").value],
-        t=document.getElementById("itemAmountField").value||1,
-        n=document.getElementById("itemName").innerHTML.toUpperCase().replace(/ +/g,"_").replace(/&[0-9a-zA-Z]/g,"").replace(/<BR>/g,""),
-        l=document.getElementById("itemNameField").value,
-        i=document.getElementById("itemDamageField").value,
-        d=document.getElementById("itemStrengthField").value,
-        m=document.getElementById("itemCritDamageField").value,
-        a=document.getElementById("itemCritChanceField").value,
-        o=document.getElementById("itemAttackSpeedField").value,
-        c=document.getElementById("itemSeaCreatureChanceField").value,
-        r=document.getElementById("itemHealthField").value,
-        g=document.getElementById("itemDefenseField").value,
-        y=document.getElementById("itemSpeedField").value,
-        u=document.getElementById("itemIntelligenceField").value,
-        s=document.getElementById("itemTrueDefenseField").value,
-        b=document.getElementById("itemMagicFindField").value,
-        B=document.getElementById("itemPetLuckField").value,
-        E=document.getElementById("abilityNameA").value,
-        I=document.getElementById("abilityDescA").value,
-        h=document.getElementById("abilityCostA").value,
-        p=document.getElementById("abilityCooldownA").value,
-        v=document.getElementById("abilityUsageA").innerHTML,
-        T=document.getElementById("abilityTypeA").innerHTML,
-        C=document.getElementById("abilityNameB").value,
-        L=document.getElementById("abilityDescB").value,
-        M=document.getElementById("abilityCostB").value,
-        H=document.getElementById("abilityCooldownB").value,
-        F=document.getElementById("abilityUsageA").innerHTML,
-        A=document.getElementById("abilityTypeA").innerHTML,
-        $=document.getElementById("abilityNameC").value,
-        f=document.getElementById("abilityDescC").value,
-        k=document.getElementById("abilityCostC").value,
-        U=document.getElementById("abilityCooldownC").value,
-        S=document.getElementById("abilityUsageA").innerHTML,
-        D=document.getElementById("abilityTypeA").innerHTML,
-        w=document.getElementById("itemDescriptionField").innerHTML,
-        z=document.getElementById("isReforgeable").checked,
-        N=document.getElementById("isRecomb").checked,
-        R=document.getElementById("itemRarityField"),
-        O=document.getElementById("itemType").innerHTML,
-        P=document.getElementById("recomb2").innerHTML,
-        x=document.getElementById("itemTypeField"),
-        G="";
-        if(e&&n&&l&&(G+=`public ItemStack ${n} = new ItemStack(Material.${e.name.toUpperCase()}, ${t||"0"});<br>`),
-        (i||d||m||a||o||c||r||g||y||u||s||b||B||E||I||h||p||v||T||C||L||M||H||F||A||$||f||k||U||S||D||w||z||recomb1||R||O||P)&&(G+='@SuppressWarnings("rawtypes")<br>List<String> lore = new ArrayList();<br>'),
-        0!=i.length&&(G+=`lore.add(Utils.chat("&7Damage: &c+${i}"));<br>`),
-        0!=d.length&&(G+=`lore.add(Utils.chat("&7Strength: &c+${d}"));<br>`),
-        0!=m.length&&(G+=`lore.add(Utils.chat("&7Crit Damage: &c+${m}%"));<br>`),
-        0!=a.length&&(G+=`lore.add(Utils.chat("&7Crit Chance: &c+${a}%"));<br>`),
-        0!=o.length&&(G+=`lore.add(Utils.chat("&7Bonus Attack Speed: &c+${o}%"));<br>`),
-        0!=c.length&&(G+=`lore.add(Utils.chat("&7Sea Creature Chance: &c+${c}%"));<br>`),
-        0==i.length&&0==d.length&&0==m.length&&0==a.length&&0==o.length&&0==c.length||(G+='lore.add(Utils.chat(" "));<br>'),
-        0!=r.length&&(G+=`lore.add(Utils.chat("&7Health: &a+${r}"));<br>`),
-        0!=g.length&&(G+=`lore.add(Utils.chat("&7Defense: &a+${g}"));<br>`),
-        0!=y.length&&(G+=`lore.add(Utils.chat("&7Health: &a+${y}"));<br>`),
-        0!=u.length&&(G+=`lore.add(Utils.chat("&7Intelligence: &a+${u}"));<br>`),
-        0!=s.length&&(G+=`lore.add(Utils.chat("&7True Defense: &a+${s}"));<br>`),
-        0!=b.length&&(G+=`lore.add(Utils.chat("&7Magic Find: &a+${b}"));<br>`),
-        0!=B.length&&(G+=`lore.add(Utils.chat("&7Pet Luck: &a+${B}"));<br>`),
-        0==r.length&&0==g.length&&0==y.length&&0==u.length&&0==s.length&&0==b.length&&0==B.length||(G+='lore.add(Utils.chat(" "));<br>'),
-        0!=E.length&&(G+=`lore.add(Utils.chat("&6${v}: ${E} &e&l${T}"));<br>`),
-        0!=I.length&&(G+=`lore.add(Utils.chat("${I}"));<br>`),
-        0!=h.length&&(G+=`lore.add(Utils.chat("&8Mana Cost: &3${h}"));<br>`),
-        0!=p.length&&(G+=`lore.add(Utils.chat("&8Cooldown: &a${p}s"));<br>`),
-        0!=C.length&&(G+=`lore.add(Utils.chat("&6${F}: ${C} &e&l${A}"));<br>`),
-        0!=L.length&&(G+=`lore.add(Utils.chat("${L}"));<br>`),
-        0!=M.length&&(G+=`lore.add(Utils.chat("&8Mana Cost: &3${M}"));<br>`),
-        0!=H.length&&(G+=`lore.add(Utils.chat("&8Cooldown: &a${H}s"));<br>`),
-        0!=$.length&&(G+=`lore.add(Utils.chat("&6${S}: ${$} &e&l${D}"));<br>`),
-        0!=f.length&&(G+=`lore.add(Utils.chat("${f}"));<br>`),
-        0!=k.length&&(G+=`lore.add(Utils.chat("&8Mana Cost: &3${k}"));<br>`),
-        0!=U.length&&(G+=`lore.add(Utils.chat("&8Cooldown: &a${U}s"));<br>`),
-        (E||I||h||p||C||L||M||H||$||f||k||U)&&(G+='lore.add(Utils.chat(" "));<br>'),0!=w.length){
-            let e=w.split("\\n");
-            if(0!=e.length)for(const t in e)G+='lore.add(Utils.chat("${e[t]}"));<br>' 
-        }
-        z&&(G+='lore.add(Utils.chat("&8This item can be reforged!"));<br>');
-        let J=R.options[R.value].text.toLowerCase(),
-        V=x.options[x.value].text.toUpperCase(),
-        W="common"==J?"&f":"uncommon"==J?"&a":"rare"==J?"&9":"epic"==J?"&5":"legendary"==J?"&6":"mythic"==J?"&d":"special"==J||"very special"==J?"&c":"&b";
-        G+=N&&J&&V?`lore.add(Utils.chat("${W}&k&la&r${W}&l ${J.toUpperCase()} ${V.toUpperCase()} ${W}&l&ka&r"));<br><br>`:`lore.add(Utils.chat("${W}&l${J.toUpperCase()} ${V.toUpperCase()}"));<br><br>`,
-        0!=(G+="\nfor (String s : loreString) {<br>\n    lore.add(Utils.chat(s));<br>\n}<br>\nmeta.setLore(lore);<br>\nitem.setItemMeta(meta);").length&&(document.getElementById("javaCode").innerHTML=G),clipboardForJava=G
-    }
-    copyJavaCode(){
-        func.copyToClipboard(
-            clipboardForJava.replace(/<br>/g,"\\n")),
-            document.getElementById("copyJavaCode").innerHTML="Copied!",
-            setTimeout(function(){document.getElementById("copyJavaCode").innerHTML="Copy to Clipboard"}, 1e3
-        )
-    }
-    copyToClipboard(e){
-        var t=document.body.appendChild(document.createElement("input"));
-        t.value=e,
-        t.focus(),
-        t.select(),
-        document.execCommand("copy"),
-        t.parentNode.removeChild(t)
-    }
-    a(){
-        let e=document.getElementById("itemNameField").value;
-        0!=e.length?(
-            document.getElementById("itemName").style.visibility="visible",
-            document.getElementById("itemName").innerHTML=func.optimize(colors,e,!1)
-        ):(
-            document.getElementById("itemName").style.visibility="hidden",
-            document.getElementById("itemName").innerHTML=""
-        );
+const items = require('minecraft-data')("1.8.8");
+let clipboardForJava = "";
+const colors = {
+    "0": "#000000",
+    "1": "#0000AA",
+    "2": "#00AA00",
+    "3": "#00AAAA",
+    "4": "#AA0000",
+    "5": "#AA00AA",
+    "6": "#FFAA00",
+    "7": "#AAAAAA",
+    "8": "#555555",
+    "9": "#5555FF",
+    "a": "#55FF55",
+    "b": "#55FFFF",
+    "c": "#FF5555",
+    "d": "#FF55FF",
+    "e": "#FFFF55",
+    "f": "#FFFFFF"
+};
 
-        let t=document.getElementById("itemDescriptionField").value;
-        0!=t.length?(
-            document.getElementById("itemDescription").style.visibility="visible",
-            document.getElementById("itemDescription").innerHTML=func.optimize(colors,t,!0)
-        ):(
-            document.getElementById("itemDescription").style.visibility="hidden",
-            document.getElementById("itemDescription").innerHTML=""
-        );
+const types = ['Right Click', 'Sneak', 'Passive'];
+const ability = ['Item Ability', 'Full Set Bonus', 'Piece Bonus'];
 
-        0!=t.length?(
-            document.getElementById("break3").innerHTML="<br>"
-        ):(
-            document.getElementById("break3").innerHTML=""
-        );
+class FunctionStructure {
+    constructor() {}
 
-        let n=document.getElementById("itemDamageField").value;
-        0!=n.length?(
-            document.getElementById("itemDamage").style.visibility="visible",
-            document.getElementById("itemDamage").innerHTML=func.optimize(
-                colors,
-                `&7Damage: &c${n<0?"":-0==n?"":"+"}${n.replace(/\B(?=(\d{3})+(?!\d))/g,",")}`,
-                !0
-            )
-        ):(
-                document.getElementById("itemDamage").style.visibility="hidden",
-                document.getElementById("itemDamage").innerHTML=""
-        );
+    e() {
 
-        let l=document.getElementById("itemStrengthField").value;
-        0!=l.length?(
-            document.getElementById("itemStrength").style.visibility="visible",
-            document.getElementById("itemStrength").innerHTML=func.optimize(
-                colors,
-                `&7Strength: &c${l<0?"":-0==l?"":"+"}${l.replace(/\B(?=(\d{3})+(?!\d))/g,",")}`,
-                !0
-            )
-        ):(
-            document.getElementById("itemStrength").style.visibility="hidden",
-            document.getElementById("itemStrength").innerHTML=""
-        );
+        // Lines for the initilization of the code. (Defining what material and name it is.)
+        let material = items.items[document.getElementById("itemIDField")
+            .value];
+        let amount = document.getElementById("itemAmountField")
+            .value || 1;
+        let itemName = document.getElementById("itemName")
+            .innerHTML.toUpperCase()
+            .replace(/ +/g, "_")
+            .replace(/&[0-9a-zA-Z]/g, "")
+            .replace(/<BR>/g, "");
 
-        let i=document.getElementById("itemCritDamageField").value;
-        0!=i.length?(
-            document.getElementById("itemCritDamage").style.visibility="visible",
-            document.getElementById("itemCritDamage").innerHTML=func.optimize(
-                colors,
-                `&7Crit Damage: &c${i<0?"":-0==i?"":"+"}${i.replace(/\B(?=(\d{3})+(?!\d))/g,",")}%`,
-                !0
-            )
-        ):(
-                document.getElementById("itemCritDamage").style.visibility="hidden",
-                document.getElementById("itemCritDamage").innerHTML=""
-        );
+        let displayName = document.getElementById("itemNameField")
+            .value;
 
-        let d=document.getElementById("itemCritChanceField").value;
-        0!=d.length?(
-            document.getElementById("itemCritChance").style.visibility="visible",
-            document.getElementById("itemCritChance").innerHTML=func.optimize(
-                colors,
-                `&7Crit Chance: &c${d<0?"":-0==d?"":"+"}${d.replace(/\B(?=(\d{3})+(?!\d))/g,",")}%`,
-                !0
-            )
-        ):(
-            document.getElementById("itemCritChance").style.visibility="hidden",
-            document.getElementById("itemCritChance").innerHTML=""
-        );
+        let itemDamage = document.getElementById("itemDamageField")
+            .value;
+        let itemStrength = document.getElementById("itemStrengthField")
+            .value;
+        let itemCritDamage = document.getElementById("itemCritDamageField")
+            .value;
+        let itemCritChance = document.getElementById("itemCritChanceField")
+            .value;
+        let itemAttackSpeed = document.getElementById("itemAttackSpeedField")
+            .value;
+        let itemSeaCreatureChance = document.getElementById("itemSeaCreatureChanceField")
+            .value;
+        let itemHealth = document.getElementById("itemHealthField")
+            .value;
+        let itemDefense = document.getElementById("itemDefenseField")
+            .value;
+        let itemSpeed = document.getElementById("itemSpeedField")
+            .value;
+        let itemIntelligence = document.getElementById("itemIntelligenceField")
+            .value;
+        let itemTrueDefense = document.getElementById("itemTrueDefenseField")
+            .value;
+        let itemMagicFind = document.getElementById("itemMagicFindField")
+            .value;
+        let itemPetLuck = document.getElementById("itemPetLuckField")
+            .value;
 
-        let m=document.getElementById("itemAttackSpeedField").value;
-        0!=m.length?(
-            document.getElementById("itemAttackSpeed").style.visibility="visible",
-            document.getElementById("itemAttackSpeed").innerHTML=func.optimize(
-                colors,
-                `&7Bonus Attack Speed: &c${m<0?"":-0==m?"":"+"}${m.replace(/\B(?=(\d{3})+(?!\d))/g,",")}%`,
-                !0
-            )
-        ):(
-            document.getElementById("itemAttackSpeed").style.visibility="hidden",
-            document.getElementById("itemAttackSpeed").innerHTML=""
-        );
+        let abilityNameA = document.getElementById("abilityNameA")
+            .value;
+        let abilityDescA = document.getElementById("abilityDescA")
+            .value;
+        let abilityCostA = document.getElementById("abilityCostA")
+            .value;
+        let abilityCooldownA = document.getElementById("abilityCooldownA")
+            .value;
+        let abilityUsageA = document.getElementById("abilityUsageA")
+            .innerHTML;
+        let abilityTypeA = document.getElementById("abilityTypeA")
+            .innerHTML;  
 
-        let a=document.getElementById("itemSeaCreatureChanceField").value;
-        0!=a.length?(
-            document.getElementById("itemSeaCreatureChance").style.visibility="visible",
-            document.getElementById("itemSeaCreatureChance").innerHTML=func.optimize(
-                colors,
-                `&7Sea Creature Chance: &c${a<0?"":-0==a?"":"+"}${a.replace(/\B(?=(\d{3})+(?!\d))/g,",")}`,
-                !0
-            )
-        ):(
-            document.getElementById("itemSeaCreatureChance").style.visibility="hidden",
-            document.getElementById("itemSeaCreatureChance").innerHTML=""
-        );
+        let abilityNameB = document.getElementById("abilityNameB")
+            .value;
+        let abilityDescB = document.getElementById("abilityDescB")
+            .value;
+        let abilityCostB = document.getElementById("abilityCostB")
+            .value;
+        let abilityCooldownB = document.getElementById("abilityCooldownB")
+            .value;
+        let abilityUsageB = document.getElementById("abilityUsageA")
+            .innerHTML;
+        let abilityTypeB = document.getElementById("abilityTypeA")
+            .innerHTML; 
 
-        0!=n.length||0!=l.length||0!=d.length||0!=i.length||0!=m.length||0!=a.length?(
-            document.getElementById("break1").innerHTML="<br>"
-        ):(
-            document.getElementById("break1").innerHTML=""
-        );
+        let abilityNameC = document.getElementById("abilityNameC")
+            .value;
+        let abilityDescC = document.getElementById("abilityDescC")
+            .value;
+        let abilityCostC = document.getElementById("abilityCostC")
+            .value;
+        let abilityCooldownC = document.getElementById("abilityCooldownC")
+            .value;
+        let abilityUsageC = document.getElementById("abilityUsageA")
+            .innerHTML;
+        let abilityTypeC = document.getElementById("abilityTypeA")
+            .innerHTML; 
 
-        let o=document.getElementById("itemHealthField").value;
-        0!=o.length?(
-            document.getElementById("itemHealth").style.visibility="visible",
-            document.getElementById("itemHealth").innerHTML=func.optimize(
-                colors,
-                `&7Health: &a${o<0?"":-0==o?"":"+"}${o.replace(/\B(?=(\d{3})+(?!\d))/g,",")}`,
-                !0
-            )
-        ):(
-            document.getElementById("itemHealth").style.visibility="hidden",
-            document.getElementById("itemHealth").innerHTML=""
-        );
-
-        let c=document.getElementById("itemDefenseField").value;
-        0!=c.length?(
-            document.getElementById("itemDefense").style.visibility="visible",
-            document.getElementById("itemDefense").innerHTML=func.optimize(
-                colors,
-                `&7Defense: &a${c<0?"":-0==c?"":"+"}${c.replace(/\B(?=(\d{3})+(?!\d))/g,",")}`,
-                !0
-            )
-        ):(
-            document.getElementById("itemDefense").style.visibility="hidden",
-            document.getElementById("itemDefense").innerHTML=""
-        );
-
-        let r=document.getElementById("itemSpeedField").value;
-        0!=r.length?(
-            document.getElementById("itemSpeed").style.visibility="visible",
-            document.getElementById("itemSpeed").innerHTML=func.optimize(
-                colors,
-                `&7Speed: &a${r<0?"":-0==r?"":"+"}${r.replace(/\B(?=(\d{3})+(?!\d))/g,",")}`,
-                !0
-            )
-        ):(
-            document.getElementById("itemSpeed").style.visibility="hidden",
-            document.getElementById("itemSpeed").innerHTML=""
-        );
-
-        let g=document.getElementById("itemIntelligenceField").value;
-        0!=g.length?(
-            document.getElementById("itemIntelligence").style.visibility="visible",
-            document.getElementById("itemIntelligence").innerHTML=func.optimize(
-                colors,
-                `&7Intelligence: &a${g<0?"":-0==g?"":"+"}${g.replace(/\B(?=(\d{3})+(?!\d))/g,",")}`,
-                !0
-            )
-        ):(
-            document.getElementById("itemIntelligence").style.visibility="hidden",
-            document.getElementById("itemIntelligence").innerHTML=""
-        );
-
-        let y=document.getElementById("itemTrueDefenseField").value;
-        0!=y.length?(
-            document.getElementById("itemTrueDefense").style.visibility="visible",
-            document.getElementById("itemTrueDefense").innerHTML=func.optimize(
-                colors,
-                `&7True Defense: &a${y<0?"":-0==y?"":"+"}${y.replace(/\B(?=(\d{3})+(?!\d))/g,",")}`,
-                !0
-            )
-        ):(
-            document.getElementById("itemTrueDefense").style.visibility="hidden",
-            document.getElementById("itemTrueDefense").innerHTML=""
-        );
-
-        let u=document.getElementById("itemMagicFindField").value;
-        0!=u.length?(
-            document.getElementById("itemMagicFind").style.visibility="visible",
-            document.getElementById("itemMagicFind").innerHTML=func.optimize(
-                colors,
-                `&7Magic Find: &a${u<0?"":-0==u?"":"+"}${u.replace(/\B(?=(\d{3})+(?!\d))/g,",")}`,
-                !0
-            )
-        ):(
-            document.getElementById("itemMagicFind").style.visibility="hidden",
-            document.getElementById("itemMagicFind").innerHTML=""
-        );
-
-        let s=document.getElementById("itemPetLuckField").value;
-        0!=s.length?(
-            document.getElementById("itemPetLuck").style.visibility="visible",
-            document.getElementById("itemPetLuck").innerHTML=func.optimize(
-                colors,
-                `&7Pet Luck: &a${s<0?"":-0==s?"":"+"}${s.replace(/\B(?=(\d{3})+(?!\d))/g,",")}`,
-                !0
-            )
-        ):(
-            document.getElementById("itemPetLuck").style.visibility="hidden",
-            document.getElementById("itemPetLuck").innerHTML=""
-        );
-
-        0!=o.length||0!=c.length||0!=r.length||0!=g.length||0!=y.length||0!=u.length||0!=s.length?(
-            document.getElementById("break2").innerHTML="<br>"
-        ):(
-            document.getElementById("break2").innerHTML=""
-        );
-    }
-    b(){
-        let e=document.getElementById("isRecomb").checked;
-        document.getElementById("isReforgeable").checked?(
-            document.getElementById("itemReforgeable").style.visibility="visible",
-            document.getElementById("itemReforgeable").innerHTML=document.getElementById("itemReforgeable").innerHTML=func.optimize(
-                colors,
-                "&8This item can be reforged!",
-                !0
-            )
-        ):(
-            document.getElementById("itemReforgeable").style.visibility="hidden",
-            document.getElementById("itemReforgeable").innerHTML=""
-        );
-        let t=document.getElementById("itemRarityField");
-        n="Rarity ";
-        switch(t.options[t.value].text.toLowerCase()){
-            case "common":
-                n="<b>COMMON</b>"; // TODO: Add a color code here
-                break;
-            case "uncommon":
-                n='<b><span style="color: #55FF55">UNCOMMON</b>';
-                break;
-            case "rare":
-                n='<b><span style="color: #5555FF">RARE</b>';
-                break;
-            case "epic":
-                n='<b><span style="color: #AA00AA">EPIC</b>';
-                break;
-            case "legendary":
-                n='<b><span style="color: #FFAA00">LEGENDARY</b>';
-                break;
-            case "mythic":
-                n='<b><span style="color: #FF55FF">MYTHIC</b>';
-                break;
-            case "special":
-                n='<b><span style="color: #FF5555">SPECIAL</b>';
-                break;
-            case "very special":
-                n='<b><span style="color: #FF5555">VERY SPECIAL</b>';
-                break;
-            case "celestial":
-                n='<b><span style="color: #55FFFF">CELESTIAL</b>'
+        let itemDescription = document.getElementById("itemDescriptionField")
+            .innerHTML;
+        let isReforgeable = document.getElementById("isReforgeable")
+            .checked;
+        let isRecomb = document.getElementById("isRecomb")
+            .checked;
+        let itemRarity = document.getElementById("itemRarityField")
+        let itemType = document.getElementById("itemType")
+            .innerHTML;
+        let recomb2 = document.getElementById("recomb2")
+            .innerHTML;
+        let itemTypeField = document.getElementById("itemTypeField");
+        let isRecipe = document.getElementById("isRecipe").checked;
+            
+        let codeString = ``;
+        if (material && itemName && displayName) {
+            codeString += `public ItemStack ${itemName} = Utils.addLore(new ItemStack(Material.${material.name.toUpperCase()}), `;
         }
 
-        0!=n.length&&(document.getElementById("itemRarity").innerHTML=n+" ");
-        let l=document.getElementById("itemTypeField"), i="Type";
-        switch(l.options[l.value].text.toLowerCase()){
-            case "sword":
-                i="<b>SWORD</b>";
-                break;
-            case "bow":
-                i="<b>BOW</b>";
-                break;
-            case "rod":
-                i="<b>ROD</b>";
-                break;
-            case "helmet":
-                i="<b>HELMET</b>";
-                break;
-            case "chestplate":
-                i="<b>CHESTPLATE</b>";
-                break;
-            case "leggings":
-                i="<b>LEGGINGS</b>";
-                break;
-            case "boots":
-                i="<b>BOOTS</b>";
-                break;
-            case "accessory":
-                i="<b>ACCESSORY</b>";
-                break;
-            case "pickaxe":
-                i="<b>PICKAXE</b>";
-                break;
-            case "axe":
-                i="<b>AXE</b>";
-                break;
-            case "shovel":
-                i="<b>SHOVEL</b>";
-                break;
-            case "hoe":
-                i="<b>HOE</b>";
-                break;
-            case "shears":
-                i="<b>SHEARS</b>";
-                break;
-            case "brewing ingredient":
-                i="<b>BREWING INGREDIENT</b>";
-                break;
-            case "other":
-                i=""
-        }
+        if (displayName) codeString += `"${displayName}", `;
 
-        0!=i.length&&(document.getElementById("itemType").innerHTML=func.getColor(t.options[t.value].text.toLowerCase(),i)),e?(
-            document.getElementById("recomb1").innerHTML=func.getColor(t.options[t.value].text.toLowerCase(),func.c()+" "),
-            document.getElementById("recomb2").innerHTML=func.getColor(t.options[t.value].text.toLowerCase()," "+func.c())
-        ):(
-            document.getElementById("recomb1").innerHTML="",
-            document.getElementById("recomb2").innerHTML=""
-        );
-    }
-    c(){
-        let e="1234567890abcdefghijklmnopqrstuvwxyz~!@#$%^&*()-=_+{}[]ABCDEFGHIJKLMNOPQRSTUVWXYZ🍆".split("");
-        return e[Math.floor(Math.random()*e.length)]
-    }
-    getColor(e,t){
-        return`<span style="color: #${
-            ("common"==e.toLowerCase())?("FFFFFF"):
-            ("uncommon"==e.toLowerCase())?("55FF55"):
-            ("rare"==e.toLowerCase())?("5555FF"):
-            ("epic"==e.toLowerCase())?("AA00AA"):
-            ("legendary"==e.toLowerCase())?("FFAA00"):
-            ("mythic"==e.toLowerCase())?("FF55FF"):
-            ("special"==e.toLowerCase())||
-            ("very special"==e.toLowerCase())?("FF5555"):("55FFFF")
-        }">`+t+"</span>"
-    }
-    optimize(e,t,n){
-        n&&(t=t.replace(/\\n/g,"<br>"));
-        let l="";
-        const i=t.split("&");
-        if(1==i.length){
-            return t+"<br>";
-        }
-        for(const t of i){
-            const n=t.substring(0,1),
-            i=t.substring(1);
-            if(null!=e[n]){
-                l+=`<span style="color: ${e[n]}">${i}</span>`;
-            } else if("l"==n){
-                l+=`<b>${i}</b>`;
-            } else if("k"==n){
-                for(const e of i.split(""))l+=func.c();
-            } else {
-                l+="o"==n?(
-                    `<i>${i}</i>`
-                ):(
-                    "n"==n?(
-                        `<u>${i}</u>`
-                    ):(
-                        t.replace(n,"")
-                    )
-                )
+        if (isRecipe) codeString += `"&eRight-click to view recipes!", `;
+
+        if (itemDamage ||
+            itemStrength ||
+            itemCritDamage ||
+            itemCritChance ||
+            itemAttackSpeed ||
+            itemSeaCreatureChance ||
+            itemHealth ||
+            itemDefense ||
+            itemSpeed ||
+            itemIntelligence ||
+            itemTrueDefense ||
+            itemMagicFind ||
+            itemPetLuck ||
+            abilityNameA ||
+            abilityDescA ||
+            abilityCostA ||
+            abilityCooldownA ||
+            abilityUsageA ||
+            abilityTypeA ||
+            abilityNameB ||
+            abilityDescB ||
+            abilityCostB ||
+            abilityCooldownB ||
+            abilityUsageB ||
+            abilityTypeB ||
+            abilityNameC ||
+            abilityDescC ||
+            abilityCostC ||
+            abilityCooldownC ||
+            abilityUsageC ||
+            abilityTypeC ||
+            itemDescription ||
+            isReforgeable ||
+            recomb1 ||
+            itemRarity ||
+            itemType ||
+            recomb2) codeString += `" ", `;
+
+        if (itemDamage.length != 0) codeString += `"&7Damage: &c+${itemDamage}", `;
+        if (itemStrength.length != 0) codeString += `"&7Strength: &c+${itemStrength}", `;
+        if (itemCritDamage.length != 0) codeString += `"&7Crit Damage: &c+${itemCritDamage}%", `;
+        if (itemCritChance.length != 0) codeString += `"&7Crit Chance: &c+${itemCritChance}%", `;
+        if (itemAttackSpeed.length != 0) codeString += `"&7Bonus Attack Speed: &c+${itemAttackSpeed}%", `;
+        if (itemSeaCreatureChance.length != 0) codeString += `"&7Sea Creature Chance: &c+${itemSeaCreatureChance}%", `;
+
+        if (itemDamage.length != 0 ||
+            itemStrength.length != 0 ||
+            itemCritDamage.length != 0 ||
+            itemCritChance.length != 0 ||
+            itemAttackSpeed.length != 0 ||
+            itemSeaCreatureChance.length != 0) codeString += `" ", `;
+
+        if (itemHealth.length != 0) codeString += `"&7Health: &a+${itemHealth}", `;
+        if (itemDefense.length != 0) codeString += `"&7Defense: &a+${itemDefense}", `;
+        if (itemSpeed.length != 0) codeString += `"&7Speed: &a+${itemSpeed}", `;
+        if (itemIntelligence.length != 0) codeString += `"&7Intelligence: &a+${itemIntelligence}", `;
+        if (itemTrueDefense.length != 0) codeString += `"&7True Defense: &a+${itemTrueDefense}", `;
+        if (itemMagicFind.length != 0) codeString += `"&7Magic Find: &a+${itemMagicFind}", `;
+        if (itemPetLuck.length != 0) codeString += `"&7Pet Luck: &a+${itemPetLuck}", `;
+
+        if (itemHealth.length != 0 ||
+            itemDefense.length != 0 ||
+            itemSpeed.length != 0 ||
+            itemIntelligence.length != 0 ||
+            itemTrueDefense.length != 0 ||
+            itemMagicFind.length != 0 ||
+            itemPetLuck.length != 0) codeString += `" ", `;
+
+        if (abilityNameA.length != 0) codeString += `"&6${abilityUsageA}: ${abilityNameA} &e&l${abilityTypeA}", `;
+        if (abilityDescA.length != 0) codeString += `"${abilityDescA}", `;
+        if (abilityCostA.length != 0) codeString += `"&8Mana Cost: &3${abilityCostA}", `;
+        if (abilityCooldownA.length != 0) codeString += `"&8Cooldown: &a${abilityCooldownA}s", `;
+
+        if (abilityNameB.length != 0) codeString += `"&6${abilityUsageB}: ${abilityNameB} &e&l${abilityTypeB}", `;
+        if (abilityDescB.length != 0) codeString += `"${abilityDescB}", `;
+        if (abilityCostB.length != 0) codeString += `"&8Mana Cost: &3${abilityCostB}", `;
+        if (abilityCooldownB.length != 0) codeString += `"&8Cooldown: &a${abilityCooldownB}s", `;
+
+        if (abilityNameC.length != 0) codeString += `"&6${abilityUsageC}: ${abilityNameC} &e&l${abilityTypeC}", `;
+        if (abilityDescC.length != 0) codeString += `"${abilityDescC}", `;
+        if (abilityCostC.length != 0) codeString += `"&8Mana Cost: &3${abilityCostC}", `;
+        if (abilityCooldownC.length != 0) codeString += `"&8Cooldown: &a${abilityCooldownC}s", `;
+
+        if (abilityNameA ||
+            abilityDescA ||
+            abilityCostA ||
+            abilityCooldownA ||
+            abilityNameB ||
+            abilityDescB ||
+            abilityCostB ||
+            abilityCooldownB ||
+            abilityNameC ||
+            abilityDescC ||
+            abilityCostC ||
+            abilityCooldownC) codeString += `" ", `
+
+        if (itemDescription.length != 0) {
+            let lores = itemDescription.split("\\n");
+            if (lores.length != 0) {
+                for (const lore in lores) {
+                    codeString += `"${lores[lore]}", `
+                }
             }
         }
-        return l+"<br>"
-    };
-    switchAbilityUsageA(){
-        let e=document.getElementById("abilityUsageA").innerHTML,
-        t=ability.indexOf(e);
-        document.getElementById("abilityUsageA").innerHTML=ability[t+1>=ability.length?0:t+1]
+
+        if (isReforgeable) codeString += `"&8This item can be reforged!", `
+
+        let rarity = itemRarity.options[itemRarity.value].text.toLowerCase();
+        let type = itemTypeField.options[itemTypeField.value].text.toUpperCase();
+        let color = rarity == "common" ? "&f" : rarity == "uncommon" ? "&a" : rarity == "rare" ? "&9" : rarity == "epic" ? "&5" : rarity == "legendary" ? "&6" : rarity == "mythic" ? "&d" : rarity == "special" || rarity == "very special" ? "&c" : "&b";
+
+        if (isRecomb && rarity && type) codeString += `"${color}&k&la&r${color}&l ${rarity.toUpperCase()}${type == "OTHER" ? "" : ` ${type}`} ${color}&l&ka&r"`;
+        else codeString += `"${color}&l${rarity.toUpperCase()}${type == "OTHER" ? "" : ` ${type}`}"`;
+
+        codeString += `);`
+
+        if (codeString.length != 0) document.getElementById("javaCode")
+            .innerHTML = codeString;
+
+        clipboardForJava = `\`\`\`java\n${codeString}\`\`\``;
     }
-    switchAbilityUsageB(){
-        let e=document.getElementById("abilityUsageB").innerHTML,
-        t=ability.indexOf(e);
-        document.getElementById("abilityUsageB").innerHTML=ability[t+1>=ability.length?0:t+1]
+
+    copyJavaCode() {
+        func.copyToClipboard(clipboardForJava.replace(/<br>/g, "\\n"));
+        document.getElementById("copyJavaCode").innerHTML = "Copied!";
+        setTimeout(function () { document.getElementById("copyJavaCode").innerHTML = "Copy to Clipboard"; }, 1000);
     }
-    switchAbilityUsageC(){
-        let e=document.getElementById("abilityUsageC").innerHTML,
-        t=ability.indexOf(e);
-        document.getElementById("abilityUsageC").innerHTML=ability[t+1>=ability.length?0:t+1]
+
+    copyToClipboard(text) {
+        var input = document.body.appendChild(document.createElement("input"));
+        input.value = text;
+        input.focus();
+        input.select();
+        document.execCommand('copy');
+        input.parentNode.removeChild(input);
     }
-    switchAbilityTypeA(){
-        let e=document.getElementById("abilityTypeA").innerHTML,
-        t=types.indexOf(e);
-        document.getElementById("abilityTypeA").innerHTML=types[t+1>=ability.length?0:t+1]
-    }switchAbilityTypeB(){
-        let e=document.getElementById("abilityTypeB").innerHTML,
-        t=types.indexOf(e);
-        document.getElementById("abilityTypeB").innerHTML=types[t+1>=ability.length?0:t+1]
-    }switchAbilityTypeC(){
-        let e=document.getElementById("abilityTypeC").innerHTML,
-        t=types.indexOf(e);
-        document.getElementById("abilityTypeC").innerHTML=types[t+1>=ability.length?0:t+1]
+
+    a() {
+
+        let itemName = document.getElementById("itemNameField")
+            .value;
+
+        if (itemName.length != 0) {
+            document.getElementById("itemName")
+                .style.visibility = 'visible';
+            document.getElementById("itemName")
+                .innerHTML = func.optimize(colors, itemName, false);
+        } else {
+            document.getElementById("itemName")
+                .style.visibility = 'hidden';
+            document.getElementById("itemName")
+                .innerHTML = "";
+        }
+
+        let itemDescription = document.getElementById("itemDescriptionField")
+            .value;
+
+        if (itemDescription.length != 0) {
+            document.getElementById("itemDescription")
+                .style.visibility = 'visible';
+            document.getElementById("itemDescription")
+                .innerHTML = func.optimize(colors, itemDescription, true);
+        } else {
+            document.getElementById("itemDescription")
+                .style.visibility = 'hidden';
+            document.getElementById("itemDescription")
+                .innerHTML = "";
+        }
+
+        if (itemDescription.length != 0) document.getElementById("break3").innerHTML = "<br>";
+        else document.getElementById("break3").innerHTML = "";
+
+        let itemDamage = document.getElementById("itemDamageField")
+            .value;
+
+        if (itemDamage.length != 0) {
+            document.getElementById("itemDamage")
+                .style.visibility = 'visible';
+            document.getElementById("itemDamage")
+                .innerHTML = func.optimize(colors, `&7Damage: &c${itemDamage < 0 ? "" : itemDamage == -0 ? "" : "+"}${itemDamage.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`, true);
+        } else {
+            document.getElementById("itemDamage")
+                .style.visibility = 'hidden';
+            document.getElementById("itemDamage")
+                .innerHTML = "";
+        }
+
+        let itemStrength = document.getElementById("itemStrengthField")
+            .value;
+
+        if (itemStrength.length != 0) {
+            document.getElementById("itemStrength")
+                .style.visibility = 'visible';
+            document.getElementById("itemStrength")
+                .innerHTML = func.optimize(colors, `&7Strength: &c${itemStrength < 0 ? "" : itemStrength == -0 ? "" : "+"}${itemStrength.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`, true);
+        } else {
+            document.getElementById("itemStrength")
+                .style.visibility = 'hidden';
+            document.getElementById("itemStrength")
+                .innerHTML = "";
+        }
+
+        let itemCritDamage = document.getElementById("itemCritDamageField")
+            .value;
+
+        if (itemCritDamage.length != 0) {
+            document.getElementById("itemCritDamage")
+                .style.visibility = 'visible';
+            document.getElementById("itemCritDamage")
+                .innerHTML = func.optimize(colors, `&7Crit Damage: &c${itemCritDamage < 0 ? "" : itemCritDamage == -0 ? "" : "+"}${itemCritDamage.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}%`, true);
+        } else {
+            document.getElementById("itemCritDamage")
+                .style.visibility = 'hidden';
+            document.getElementById("itemCritDamage")
+                .innerHTML = "";
+        }        
+
+        let itemCritChance = document.getElementById("itemCritChanceField")
+            .value;
+
+        if (itemCritChance.length != 0) {
+            document.getElementById("itemCritChance")
+                .style.visibility = 'visible';
+            document.getElementById("itemCritChance")
+                .innerHTML = func.optimize(colors, `&7Crit Chance: &c${itemCritChance < 0 ? "" : itemCritChance == -0 ? "" : "+"}${itemCritChance.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}%`, true);
+        } else {
+            document.getElementById("itemCritChance")
+                .style.visibility = 'hidden';
+            document.getElementById("itemCritChance")
+                .innerHTML = "";
+        }
+
+        let itemAttackSpeed = document.getElementById("itemAttackSpeedField")
+            .value;
+
+        if (itemAttackSpeed.length != 0) {
+            document.getElementById("itemAttackSpeed")
+                .style.visibility = 'visible';
+            document.getElementById("itemAttackSpeed")
+                .innerHTML = func.optimize(colors, `&7Bonus Attack Speed: &c${itemAttackSpeed < 0 ? "" : itemAttackSpeed == -0 ? "" : "+"}${itemAttackSpeed.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}%`, true);
+        } else {
+            document.getElementById("itemAttackSpeed")
+                .style.visibility = 'hidden';
+            document.getElementById("itemAttackSpeed")
+                .innerHTML = "";
+        }
+
+        let itemSeaCreatureChance = document.getElementById("itemSeaCreatureChanceField")
+            .value;
+
+        if (itemSeaCreatureChance.length != 0) {
+            document.getElementById("itemSeaCreatureChance")
+                .style.visibility = 'visible';
+            document.getElementById("itemSeaCreatureChance")
+                .innerHTML = func.optimize(colors, `&7Sea Creature Chance: &c${itemSeaCreatureChance < 0 ? "" : itemSeaCreatureChance == -0 ? "" : "+"}${itemSeaCreatureChance.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`, true);
+        } else {
+            document.getElementById("itemSeaCreatureChance")
+                .style.visibility = 'hidden';
+            document.getElementById("itemSeaCreatureChance")
+                .innerHTML = "";
+        }
+
+        // Break
+        if (itemDamage.length != 0 ||
+            itemStrength.length != 0 ||
+            itemCritChance.length != 0 ||
+            itemCritDamage.length != 0 ||
+            itemAttackSpeed.length != 0 ||
+            itemSeaCreatureChance.length != 0) document.getElementById("break1").innerHTML = "<br>";
+        else document.getElementById("break1").innerHTML = "";    
+
+        let itemHealth = document.getElementById("itemHealthField")
+            .value;
+
+        if (itemHealth.length != 0) {
+            document.getElementById("itemHealth")
+                .style.visibility = 'visible';
+            document.getElementById("itemHealth")
+                .innerHTML = func.optimize(colors, `&7Health: &a${itemHealth < 0 ? "" : itemHealth == -0 ? "" : "+"}${itemHealth.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`, true);
+        } else {
+            document.getElementById("itemHealth")
+                .style.visibility = 'hidden';
+            document.getElementById("itemHealth")
+                .innerHTML = "";
+        }
+
+        let itemDefense = document.getElementById("itemDefenseField")
+            .value;
+
+        if (itemDefense.length != 0) {
+            document.getElementById("itemDefense")
+                .style.visibility = 'visible';
+            document.getElementById("itemDefense")
+                .innerHTML = func.optimize(colors, `&7Defense: &a${itemDefense < 0 ? "" : itemDefense == -0 ? "" : "+"}${itemDefense.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`, true);
+        } else {
+            document.getElementById("itemDefense")
+                .style.visibility = 'hidden';
+            document.getElementById("itemDefense")
+                .innerHTML = "";
+        }
+
+        let itemSpeed = document.getElementById("itemSpeedField")
+            .value;
+
+        if (itemSpeed.length != 0) {
+            document.getElementById("itemSpeed")
+                .style.visibility = 'visible';
+            document.getElementById("itemSpeed")
+                .innerHTML = func.optimize(colors, `&7Speed: &a${itemSpeed < 0 ? "" : itemSpeed == -0 ? "" : "+"}${itemSpeed.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`, true);
+        } else {
+            document.getElementById("itemSpeed")
+                .style.visibility = 'hidden';
+            document.getElementById("itemSpeed")
+                .innerHTML = "";
+        }
+
+        let itemIntelligence = document.getElementById("itemIntelligenceField")
+            .value;
+
+        if (itemIntelligence.length != 0) {
+            document.getElementById("itemIntelligence")
+                .style.visibility = 'visible';
+            document.getElementById("itemIntelligence")
+                .innerHTML = func.optimize(colors, `&7Intelligence: &a${itemIntelligence < 0 ? "" : itemIntelligence == -0 ? "" : "+"}${itemIntelligence.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`, true);
+        } else {
+            document.getElementById("itemIntelligence")
+                .style.visibility = 'hidden';
+            document.getElementById("itemIntelligence")
+                .innerHTML = "";
+        }
+
+        let itemTrueDefense = document.getElementById("itemTrueDefenseField")
+            .value;
+
+        if (itemTrueDefense.length != 0) {
+            document.getElementById("itemTrueDefense")
+                .style.visibility = 'visible';
+            document.getElementById("itemTrueDefense")
+                .innerHTML = func.optimize(colors, `&7True Defense: &a${itemTrueDefense < 0 ? "" : itemTrueDefense == -0 ? "" : "+"}${itemTrueDefense.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`, true);
+        } else {
+            document.getElementById("itemTrueDefense")
+                .style.visibility = 'hidden';
+            document.getElementById("itemTrueDefense")
+                .innerHTML = "";
+        }
+
+        if (document.getElementById("isRecipe").checked) {
+            document.getElementById("itemRecipe").style.visibility = "visible";
+            document.getElementById("itemRecipe").innerHTML = func.optimize(colors, `&eRight-click to view recipes!<br>`, true);
+        } else {
+            document.getElementById('itemRecipe').style.visibility = "hidden";
+            document.getElementById('itemRecipe').innerHTML = "";
+        }
+
+        let itemMagicFind = document.getElementById("itemMagicFindField")
+            .value;
+
+        if (itemMagicFind.length != 0) {
+            document.getElementById("itemMagicFind")
+                .style.visibility = 'visible';
+            document.getElementById("itemMagicFind")
+                .innerHTML = func.optimize(colors, `&7Magic Find: &a${itemMagicFind < 0 ? "" : itemMagicFind == -0 ? "" : "+"}${itemMagicFind.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`, true);
+        } else {
+            document.getElementById("itemMagicFind")
+                .style.visibility = 'hidden';
+            document.getElementById("itemMagicFind")
+                .innerHTML = "";
+        }        
+
+        let itemPetLuck = document.getElementById("itemPetLuckField")
+            .value;
+
+        if (itemPetLuck.length != 0) {
+            document.getElementById("itemPetLuck")
+                .style.visibility = 'visible';
+            document.getElementById("itemPetLuck")
+                .innerHTML = func.optimize(colors, `&7Pet Luck: &a${itemPetLuck < 0 ? "" : itemPetLuck == -0 ? "" : "+"}${itemPetLuck.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`, true);
+        } else {
+            document.getElementById("itemPetLuck")
+                .style.visibility = 'hidden';
+            document.getElementById("itemPetLuck")
+                .innerHTML = "";
+        }
+
+        if (itemHealth.length != 0 ||
+            itemDefense.length != 0 ||
+            itemSpeed.length != 0 ||
+            itemIntelligence.length != 0 ||
+            itemTrueDefense.length != 0 ||
+            itemMagicFind.length != 0 ||
+            itemPetLuck.length != 0) document.getElementById("break2").innerHTML = "<br>";
+        else document.getElementById("break2").innerHTML = "";
     }
-    d(){
-        let e=document.getElementById("itemNameA"),
-        t=document.getElementById("itemDescA"),
-        n=document.getElementById("itemCostA"),
-        l=document.getElementById("itemCooldownA"),
-        i=document.getElementById("itemNameB"),
-        d=document.getElementById("itemDescB"),
-        m=document.getElementById("itemCostB"),
-        a=document.getElementById("itemCooldownB"),
-        o=document.getElementById("itemNameC"),
-        c=document.getElementById("itemDescC"),
-        r=document.getElementById("itemCostC"),
-        g=document.getElementById("itemCooldownC"),
-        y=document.getElementById("abilityTypeA"),
-        u=document.getElementById("abilityUsageA"),
-        s=document.getElementById("abilityNameA"),
-        b=document.getElementById("abilityDescA"),
-        B=document.getElementById("abilityCostA"),
-        E=document.getElementById("abilityCooldownA"),
-        I=document.getElementById("abilityTypeB"),
-        h=document.getElementById("abilityUsageB"),
-        p=document.getElementById("abilityNameB"),
-        v=document.getElementById("abilityDescB"),
-        T=document.getElementById("abilityCostB"),
-        C=document.getElementById("abilityCooldownB"),
-        L=document.getElementById("abilityTypeC"),
-        M=document.getElementById("abilityUsageC"),
-        H=document.getElementById("abilityNameC"),
-        F=document.getElementById("abilityDescC"),
-        A=document.getElementById("abilityCostC"),
-        $=document.getElementById("abilityCooldownC");
-        0!=s.value.length?(
-            e.innerHTML=func.optimize(
-                colors,
-                `&6${u.innerHTML}: ${s.value} &e${"PASSIVE"==y.innerHTML.toUpperCase()?"":y.innerHTML.toUpperCase()}`,
-                !1
-            )
-        ):(
-            e.innerHTML="",
-            0!=b.value.length?(
-                t.innerHTML=func.optimize(colors,b.value,!0)
-            ):(
-                t.innerHTML="",
-                (0!=B.value.length)?(
-                    n.innerHTML=func.optimize(colors,`&8Mana Cost: &3${B.value}`,!1)
-                ):(
-                    n.innerHTML="",
-                    (0!=E.value.length)?(
-                        l.innerHTML=func.optimize(colors,`&8Cooldown: &a${E.value}s`,!1)
-                    ):(
-                            l.innerHTML="",
-                            (0!=s.value.length||0!=b.value.length||0!=B.value.length||0!=E.value.length)?(
-                                document.getElementById("break4").innerHTML="<br>"
-                            ):(
-                                document.getElementById("break4").innerHTML="",
-                                (0!=p.value.length)?(
-                                    i.innerHTML=func.optimize(
-                                        colors,
-                                        `&6${h.innerHTML}: ${p.value} &e${"PASSIVE"==I.innerHTML.toUpperCase()?"":I.innerHTML.toUpperCase()}`,
-                                        !1
-                                    )
-                                ):(
-                                    i.innerHTML="",
-                                    (0!=v.value.length)?(
-                                        d.innerHTML=func.optimize(colors,v.value,!0)
-                                    ):(
-                                        d.innerHTML="",
-                                        (0!=T.value.length)?(
-                                            m.innerHTML=func.optimize(
-                                                colors,
-                                                `&8Mana Cost: &3${T.value}`,
-                                                !1
-                                            )
-                                        ):(
-                                            m.innerHTML="",
-                                            (0!=C.value.length)?(
-                                                a.innerHTML=func.optimize(
-                                                    colors,
-                                                    `&8Cooldown: &a${C.value}s`,
-                                                    !1
-                                                )
-                                            ):(
-                                                a.innerHTML="",
-                                                (0!=p.value.length||0!=v.value.length||0!=T.value.length||0!=C.value.length)?(
-                                                    document.getElementById("break5").innerHTML="<br>"
-                                                ):(
-                                                    document.getElementById("break5").innerHTML="",
-                                                    (0!=H.value.length)?(
-                                                        o.innerHTML=func.optimize(
-                                                            colors,
-                                                            `&6${M.innerHTML}: ${H.value} &e${"PASSIVE"==L.innerHTML.toUpperCase()?"":L.innerHTML.toUpperCase()}`,
-                                                            !1
-                                                        )
-                                                    ):(
-                                                        o.innerHTML="",
-                                                        (0!=F.value.length)?(
-                                                            c.innerHTML=func.optimize(colors,F.value,!0)
-                                                        ):(
-                                                            c.innerHTML="",
-                                                            (0!=A.value.length)?(
-                                                                r.innerHTML=func.optimize(
-                                                                    colors,`
-                                                                    &8Mana Cost: &3${A.value}`,
-                                                                    !1
-                                                                )
-                                                            ):(
-                                                                r.innerHTML="",
-                                                                (0!=$.value.length)?(
-                                                                    g.innerHTML=func.optimize(
-                                                                        colors,
-                                                                        `&8Cooldown: &a${$.value}s`,
-                                                                        !1
-                                                                    )
-                                                                ):(
-                                                                    g.innerHTML="",
-                                                                    (0!=H.value.length||0!=F.value.length||0!=A.value.length||0!=$.value.length)?(
-                                                                        document.getElementById("break6").innerHTML="<br>"
-                                                                        ):(
-                                                                            document.getElementById("break6").innerHTML=""
-                                                                        )
-                                                                    )
-                                                                )
-                                                            )
-                                                        )
-                                                    )
-                                                )
-                                            )
-                                        )
-                                    )
-                                )
-                            )
-                    )
-                )
-            )
+
+    b() {
+
+        let isRecomb = document.getElementById("isRecomb")
+            .checked;
+        let isReforgeable = document.getElementById("isReforgeable")
+            .checked;
+
+        if (isReforgeable) {
+            document.getElementById("itemReforgeable")
+                .style.visibility = 'visible';
+            document.getElementById("itemReforgeable")
+                .innerHTML = document.getElementById("itemReforgeable")
+                .innerHTML = func.optimize(colors, "&8This item can be reforged!", true);
+        } else {
+            document.getElementById("itemReforgeable")
+                .style.visibility = 'hidden';
+            document.getElementById("itemReforgeable")
+                .innerHTML = "";
+        }
+
+        let itemRarity = document.getElementById("itemRarityField");
+        let rarity = "Rarity ";
+        switch (itemRarity.options[itemRarity.value].text.toLowerCase()) {
+            case "common":
+                rarity = "<b>COMMON</b>";
+                break;
+            case "uncommon":
+                rarity = "<b><span style=\"color: #55FF55\">UNCOMMON</b>";
+                break;
+            case "rare":
+                rarity = "<b><span style=\"color: #5555FF\">RARE</b>";
+                break;
+            case "epic":
+                rarity = "<b><span style=\"color: #AA00AA\">EPIC</b>";
+                break;
+            case "legendary":
+                rarity = "<b><span style=\"color: #FFAA00\">LEGENDARY</b>";
+                break;
+            case "mythic":
+                rarity = "<b><span style=\"color: #FF55FF\">MYTHIC</b>";    
+                break;
+            case "special":
+                rarity = "<b><span style=\"color: #FF5555\">SPECIAL</b>";
+                break;
+            case "very special":
+                rarity = "<b><span style=\"color: #FF5555\">VERY SPECIAL</b>";
+                break;
+            case "celestial":
+                rarity = "<b><span style=\"color: #55FFFF\">CELESTIAL</b>";
+                break;
+        }
+
+        if (rarity.length != 0) document.getElementById("itemRarity")
+            .innerHTML = rarity + " ";
+
+        let itemType = document.getElementById("itemTypeField");
+        let type = "Type";
+        switch (itemType.options[itemType.value].text.toLowerCase()) {
+            case "sword":
+                type = "<b>SWORD</b>";
+                break;
+            case "bow":
+                type = "<b>BOW</b>";
+                break;
+            case "rod":
+                type = "<b>ROD</b>";
+                break;
+            case "helmet":
+                type = "<b>HELMET</b>";
+                break;
+            case "chestplate":
+                type = "<b>CHESTPLATE</b>";
+                break;
+            case "leggings":
+                type = "<b>LEGGINGS</b>";
+                break;
+            case "boots":
+                type = "<b>BOOTS</b>";
+                break;
+            case "accessory":
+                type = "<b>ACCESSORY</b>";
+                break;
+            case "pickaxe":
+                type = "<b>PICKAXE</b>";
+                break;
+            case "axe":
+                type = "<b>AXE</b>";
+                break;
+            case "shovel":
+                type = "<b>SHOVEL</b>";
+                break;
+            case "hoe":
+                type = "<b>HOE</b>";
+                break;
+            case "shears":
+                type = "<b>SHEARS</b>";
+                break;
+            case "brewing ingredient":
+                type = "<b>BREWING INGREDIENT</b>";
+                break;
+            case "other":
+                type = "<b><b>";
+                break;
+        }
+
+        if (type.length != 0) document.getElementById("itemType")
+            .innerHTML = func.getColor(itemRarity.options[itemRarity.value].text.toLowerCase(), type);
+
+        if (isRecomb) {
+            document.getElementById("recomb1")
+                .innerHTML = func.getColor(itemRarity.options[itemRarity.value].text.toLowerCase(), func.c() + " ");
+            document.getElementById("recomb2")
+                .innerHTML = func.getColor(itemRarity.options[itemRarity.value].text.toLowerCase(), " " + func.c());
+        } else {
+            document.getElementById("recomb1")
+                .innerHTML = "";
+            document.getElementById("recomb2")
+                .innerHTML = "";
         }
     }
-    global.functions=FunctionStructure;
-    
+
+    c() {
+        let array = "1234567890abcdefghijklmnopqrstuvwxyz~!@#$%^&*()-=_+{}[]ABCDEFGHIJKLMNOPQRSTUVWXYZ🍆mmLoL".split("");
+        return array[Math.floor(Math.random() * array.length)];
+    }
+
+    getColor(color, str) {
+        return `<span style=\"color: #${color.toLowerCase() == "common" ? "FFFFFF" : color.toLowerCase() == "uncommon" ? "55FF55" : color.toLowerCase() == "rare" ? "5555FF" : color.toLowerCase() == "epic" ? "AA00AA" : color.toLowerCase() == "legendary" ? "FFAA00" : color.toLowerCase() == "mythic" ? "FF55FF" : color.toLowerCase() == "special" || color.toLowerCase() == "very special" ? "FF5555" : "55FFFF"}\">` + str + "</span>"
+    }
+
+    optimize(colors, text, type) {
+
+        if (type) text = text.replace(/\\n/g, '<br>');
+
+        let output = "";
+
+        const parts = text.split("&");
+
+        if (parts.length == 1)
+            return text + "<br>";
+
+        for (const part of parts) {
+            const color = part.substring(0, 1);
+            const content = part.substring(1);
+
+            if (colors[color] != null) {
+                output += `<span style=\"color: ${colors[color]}\">${content}</span>`;
+            } else if (color == "l") {
+                output += `<b>${content}</b>`;
+            } else if (color == "k") {
+                for (const letter of content.split("")) { output += func.c(); };
+            } else if (color == "o") {
+                output += `<i>${content}</i>`;
+            } else if (color == "n") {
+                output += `<u>${content}</u>`;
+            } else output += part.replace(color, "");
+        }
+        return output + "<br>";
+    }
+
+    switchAbilityUsageA() {
+        let abil = document.getElementById("abilityUsageA")
+            .innerHTML;
+        let index = ability.indexOf(abil);
+        document.getElementById("abilityUsageA")
+            .innerHTML = ability[index + 1 >= ability.length ? 0 : index + 1];
+    }
+
+    switchAbilityUsageB() {
+        let abil = document.getElementById("abilityUsageB")
+            .innerHTML;
+        let index = ability.indexOf(abil);
+        document.getElementById("abilityUsageB")
+            .innerHTML = ability[index + 1 >= ability.length ? 0 : index + 1];
+    }
+
+    switchAbilityUsageC() {
+        let abil = document.getElementById("abilityUsageC")
+            .innerHTML;
+        let index = ability.indexOf(abil);
+        document.getElementById("abilityUsageC")
+            .innerHTML = ability[index + 1 >= ability.length ? 0 : index + 1];
+    }
+
+    switchAbilityTypeA() {
+        let abil = document.getElementById("abilityTypeA")
+            .innerHTML;
+        let index = types.indexOf(abil);
+        document.getElementById("abilityTypeA")
+            .innerHTML = types[index + 1 >= ability.length ? 0 : index + 1];
+    }
+
+    switchAbilityTypeB() {
+        let abil = document.getElementById("abilityTypeB")
+            .innerHTML;
+        let index = types.indexOf(abil);
+        document.getElementById("abilityTypeB")
+            .innerHTML = types[index + 1 >= ability.length ? 0 : index + 1];
+    }
+
+    switchAbilityTypeC() {
+        let abil = document.getElementById("abilityTypeC")
+            .innerHTML;
+        let index = types.indexOf(abil);
+        document.getElementById("abilityTypeC")
+            .innerHTML = types[index + 1 >= ability.length ? 0 : index + 1];
+    }
+
+    d() {
+
+        // The display text
+
+        let itemNameA = document.getElementById("itemNameA");
+        let itemDescA = document.getElementById("itemDescA");
+        let itemCostA = document.getElementById("itemCostA");
+        let itemCooldownA = document.getElementById("itemCooldownA");
+
+        let itemNameB = document.getElementById("itemNameB");
+        let itemDescB = document.getElementById("itemDescB");
+        let itemCostB = document.getElementById("itemCostB");
+        let itemCooldownB = document.getElementById("itemCooldownB");
+
+        let itemNameC = document.getElementById("itemNameC");
+        let itemDescC = document.getElementById("itemDescC");
+        let itemCostC = document.getElementById("itemCostC");
+        let itemCooldownC = document.getElementById("itemCooldownC");
+
+        // All field entries
+
+        let itemUsageA = document.getElementById("abilityTypeA");
+        let itemTypeA = document.getElementById("abilityUsageA");
+        let abilityNameA = document.getElementById("abilityNameA");
+        let abilityDescA = document.getElementById("abilityDescA");
+        let abilityCostA = document.getElementById("abilityCostA");
+        let abilityCooldownA = document.getElementById("abilityCooldownA");
+
+        let itemUsageB = document.getElementById("abilityTypeB");
+        let itemTypeB = document.getElementById("abilityUsageB");
+        let abilityNameB = document.getElementById("abilityNameB");
+        let abilityDescB = document.getElementById("abilityDescB");
+        let abilityCostB = document.getElementById("abilityCostB");
+        let abilityCooldownB = document.getElementById("abilityCooldownB");
+
+        let itemUsageC = document.getElementById("abilityTypeC");
+        let itemTypeC = document.getElementById("abilityUsageC");
+        let abilityNameC = document.getElementById("abilityNameC");
+        let abilityDescC = document.getElementById("abilityDescC");
+        let abilityCostC = document.getElementById("abilityCostC");
+        let abilityCooldownC = document.getElementById("abilityCooldownC");
+
+        if (abilityNameA.value.length != 0) itemNameA.innerHTML = func.optimize(colors, `&6${itemTypeA.innerHTML}: ${abilityNameA.value} &e${itemUsageA.innerHTML.toUpperCase() == "PASSIVE" ? "" : itemUsageA.innerHTML.toUpperCase()}`, false);
+        else itemNameA.innerHTML = "";
+        if (abilityDescA.value.length != 0) itemDescA.innerHTML = func.optimize(colors, abilityDescA.value, true);
+        else itemDescA.innerHTML = "";
+        if (abilityCostA.value.length != 0) itemCostA.innerHTML = func.optimize(colors, `&8Mana Cost: &3${abilityCostA.value}`, false);
+        else itemCostA.innerHTML = "";
+        if (abilityCooldownA.value.length != 0) itemCooldownA.innerHTML = func.optimize(colors, `&8Cooldown: &a${abilityCooldownA.value}s`, false)
+        else itemCooldownA.innerHTML = "";
+
+        if (abilityNameA.value.length != 0 ||
+            abilityDescA.value.length != 0 ||
+            abilityCostA.value.length != 0 ||
+            abilityCooldownA.value.length != 0) document.getElementById("break4").innerHTML = "<br>";
+        else document.getElementById("break4").innerHTML = "";    
+
+        if (abilityNameB.value.length != 0) itemNameB.innerHTML = func.optimize(colors, `&6${itemTypeB.innerHTML}: ${abilityNameB.value} &e${itemUsageB.innerHTML.toUpperCase() == "PASSIVE" ? "" : itemUsageB.innerHTML.toUpperCase()}`, false);
+        else itemNameB.innerHTML = "";
+        if (abilityDescB.value.length != 0) itemDescB.innerHTML = func.optimize(colors, abilityDescB.value, true);
+        else itemDescB.innerHTML = "";
+        if (abilityCostB.value.length != 0) itemCostB.innerHTML = func.optimize(colors, `&8Mana Cost: &3${abilityCostB.value}`, false);
+        else itemCostB.innerHTML = "";
+        if (abilityCooldownB.value.length != 0) itemCooldownB.innerHTML = func.optimize(colors, `&8Cooldown: &a${abilityCooldownB.value}s`, false)
+        else itemCooldownB.innerHTML = "";
+
+        if (abilityNameB.value.length != 0 ||
+            abilityDescB.value.length != 0 ||
+            abilityCostB.value.length != 0 ||
+            abilityCooldownB.value.length != 0) document.getElementById("break5").innerHTML = "<br>";
+        else document.getElementById("break5").innerHTML = "";
+
+        if (abilityNameC.value.length != 0) itemNameC.innerHTML = func.optimize(colors, `&6${itemTypeC.innerHTML}: ${abilityNameC.value} &e${itemUsageC.innerHTML.toUpperCase() == "PASSIVE" ? "" : itemUsageC.innerHTML.toUpperCase()}`, false);
+        else itemNameC.innerHTML = "";
+        if (abilityDescC.value.length != 0) itemDescC.innerHTML = func.optimize(colors, abilityDescC.value, true);
+        else itemDescC.innerHTML = "";
+        if (abilityCostC.value.length != 0) itemCostC.innerHTML = func.optimize(colors, `&8Mana Cost: &3${abilityCostC.value}`, false);
+        else itemCostC.innerHTML = "";
+        if (abilityCooldownC.value.length != 0) itemCooldownC.innerHTML = func.optimize(colors, `&8Cooldown: &a${abilityCooldownC.value}s`, false)
+        else itemCooldownC.innerHTML = "";
+
+        if (abilityNameC.value.length != 0 ||
+            abilityDescC.value.length != 0 ||
+            abilityCostC.value.length != 0 ||
+            abilityCooldownC.value.length != 0) document.getElementById("break6").innerHTML = "<br>";
+        else document.getElementById("break6").innerHTML = "";    
+
+        
+    }
+}
+
+global.functions = FunctionStructure;
