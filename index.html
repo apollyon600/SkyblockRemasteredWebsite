@@ -91,6 +91,10 @@
             <input type="number" class="mcfield" id="itemMagicFindField" placeholder="0"><br>
             <div class="mpnc">Pet Luck</div>
             <input type="number" class="mcfield" id="itemPetLuckField" placeholder="0"><br><br>
+            <label class="container mpnc">Recipe?
+                <input type="checkbox" id="isRecipe">
+                <span class="checkmark"></span>
+            </label><br>
             <label class="container mpnc">Reforgeable?
                 <input type="checkbox" id="isReforgeable">
                 <span class="checkmark"></span>
@@ -130,6 +134,7 @@
         <br><h1>Item Display</h1>
         <div class="imgbord" id="itemDisplay">
             <span class="black" id="itemName"></span>
+            <span class="black" id="itemRecipe"></span>
             <span class="black" id="itemDamage"></span>
             <span class="black" id="itemStrength"></span>
             <span class="black" id="itemCritDamage"></span>
@@ -180,7 +185,7 @@
         <h1>Command Generator</h1>
         <div class="imgbord" id="itemDisplay">
             <span class="black" id="commandGenerator">Lazy to code this, pretty sad.</span>
-        </div>
+        </div><br>
         <span class="black" id="ignore-this"></span>
     </body>
 </html>
