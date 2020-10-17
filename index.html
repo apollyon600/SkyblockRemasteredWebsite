@@ -1,1 +1,186 @@
-<!DOCTYPE html><html> <head> <title>SkyblockRemastered Item Generator</title> <link rel="stylesheet" href="style.css"> <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/minecraftia" type="text/css"/> </head> <body> <script src="bundle.js" type="text/javascript"></script> <script type = "text/javascript"> const func = new functions(); setInterval(function() { func.a(); func.b(); func.d(); func.e(); }, 50); </script> <div class="header"> <h1>Welcome to the SkyblockRemastered Item Generator</h1> <h3>Fill out each value to generate items with an output of java, item display, and item code<br>You can use color codes for each text using & while following with the letter/number.<br>To line break, or to skip a line you can use \n</h3> </div> <div class="information"> <h2>Unicode/Symbols:</h2> <p>Health - ❤<br>Defense - ❈<br>Strength - ❁<br>Speed - ✦<br>Crit Chance - ☣<br>Crit Damage - ☠<br>Intelligence - ✎<br>Sea Creature Chance - ∞<br>Magic Find - ✯<br>Pet Luck - ♣<br>Slayer - ☠<br>True Defense - ❂<br>Attack Speed - ​⚔</p> </div> <div> <div class="itemInformation"> <h1>Item Information</h1> <div class="mpnc">Item ID</div> <input type="number" class="mcfield" id="itemIDField" placeholder="0" min="0"><br> <div class="mpnc">Item Amount</div> <input type="number" class="mcfield" id="itemAmountField" placeholder="1" min="1"><br> <div class="mpnc">Item Name</div> <input type="text" class="mcfield" id="itemNameField" placeholder="Name"><br> <div class="mpnc">Item Description</div> <input type="text" class="mcfield" id="itemDescriptionField" placeholder="Description"><br> <div class="mpnc">Item Rarity</div> <select type="text" class="mcin gray" id="itemRarityField" placeholder="0" value> <option value="0">Common</option> <option value="1">Uncommon</option> <option value="2">Rare</option> <option value="3">Epic</option> <option value="4">Legendary</option> <option value="5">Mythic</option> <option value="6">Special</option> <option value="7">Very Special</option> <option value="8">Celestial</option> </select><br> <div class="mpnc">Item Type</div> <select type="text" class="mcin gray" id="itemTypeField" placeholder="0" value> <option value="0">Sword</option> <option value="1">Bow</option> <option value="2">Rod</option> <option value="3">Helmet</option> <option value="4">Chestplate</option> <option value="5">Leggings</option> <option value="6">Boots</option> <option value="7">Accessory</option> <option value="8">Pickaxe</option> <option value="9">Axe</option> <option value="10">Shovel</option> <option value="11">Hoe</option> <option value="12">Shears</option> <option value="13">Brewing Ingredient</option> <option value="14">Other</option> </select><br><br> </div> <h1>Item Statistics</h1> <div class="mpnc">Damage</div> <input type="number" class="mcfield" id="itemDamageField" placeholder="0"><br> <div class="mpnc">Strength</div> <input type="number" class="mcfield" id="itemStrengthField" placeholder="0"><br> <div class="mpnc">Crit Damage</div> <input type="number" class="mcfield" id="itemCritDamageField" placeholder="0"><br> <div class="mpnc">Crit Chance</div> <input type="number" class="mcfield" id="itemCritChanceField" placeholder="0"><br> <div class="mpnc">Attack Speed</div> <input type="number" class="mcfield" id="itemAttackSpeedField" placeholder="0"><br> <div class="mpnc">Sea Creature Chance</div> <input type="number" class="mcfield" id="itemSeaCreatureChanceField" placeholder="0"><br> <div class="mpnc">Health</div> <input type="number" class="mcfield" id="itemHealthField" placeholder="0"><br> <div class="mpnc">Defense</div> <input type="number" class="mcfield" id="itemDefenseField" placeholder="0"><br> <div class="mpnc">Speed</div> <input type="number" class="mcfield" id="itemSpeedField" placeholder="0"><br> <div class="mpnc">Intelligence</div> <input type="number" class="mcfield" id="itemIntelligenceField" placeholder="0"><br> <div class="mpnc">True Defense</div> <input type="number" class="mcfield" id="itemTrueDefenseField" placeholder="0"><br> <div class="mpnc">Magic Find</div> <input type="number" class="mcfield" id="itemMagicFindField" placeholder="0"><br> <div class="mpnc">Pet Luck</div> <input type="number" class="mcfield" id="itemPetLuckField" placeholder="0"><br><br> <label class="container mpnc">Reforgeable? <input type="checkbox" id="isReforgeable"> <span class="checkmark"></span> </label><br> <label class="container mpnc">Recombobulated? <input type="checkbox" id="isRecomb"> <span class="checkmark"></span> </label> <div class="abilityA"> <h1>Ability #1</h1> <input type="text" class="mcfield" id="abilityNameA" placeholder="Ability Name"><br> <input type="text" class="mcfield" id="abilityDescA" placeholder="Ability Description"><br> <input type="number" class="mcfield" id="abilityCostA" placeholder="Ability Cost"><br> <input type="number" class="mcfield" id="abilityCooldownA" placeholder="Ability Cooldown"><br> <button class="button contents" style="width: 190px; text-align: center;" onclick="func.switchAbilityUsageA();" id="abilityUsageA">Item Ability</button> <button class="button contents" style="width: 190px; text-align: center;" onclick="func.switchAbilityTypeA();" id="abilityTypeA">Right Click</button> </div> <div class="abilityB"> <h1>Ability #2</h1> <input type="text" class="mcfield" id="abilityNameB" placeholder="Ability Name"><br> <input type="text" class="mcfield" id="abilityDescB" placeholder="Ability Description"><br> <input type="number" class="mcfield" id="abilityCostB" placeholder="Ability Cost"><br> <input type="number" class="mcfield" id="abilityCooldownB" placeholder="Ability Cooldown"><br> <button class="button contents" style="width: 190px; text-align: center;" onclick="func.switchAbilityUsageB();" id="abilityUsageB">Item Ability</button> <button class="button contents" style="width: 190px; text-align: center;" onclick="func.switchAbilityTypeB();" id="abilityTypeB">Right Click</button> </div> <div class="abilityC"> <h1>Ability #3</h1> <input type="text" class="mcfield" id="abilityNameC" placeholder="Ability Name"><br> <input type="text" class="mcfield" id="abilityDescC" placeholder="Ability Description"><br> <input type="number" class="mcfield" id="abilityCostC" placeholder="Ability Cost"><br> <input type="number" class="mcfield" id="abilityCooldownC" placeholder="Ability Cooldown"><br> <button class="button contents" style="width: 190px; text-align: center;" onclick="func.switchAbilityUsageC();" id="abilityUsageC">Item Ability</button> <button class="button contents" style="width: 190px; text-align: center;" onclick="func.switchAbilityTypeC();" id="abilityTypeC">Right Click</button> </div> </div> <br><h1>Item Display</h1> <div class="imgbord" id="itemDisplay"> <span class="black" id="itemName"></span> <span class="black" id="itemDamage"></span> <span class="black" id="itemStrength"></span> <span class="black" id="itemCritDamage"></span> <span class="black" id="itemCritChance"></span> <span class="black" id="itemAttackSpeed"></span> <span class="black" id="itemSeaCreatureChance"></span> <span class="black" id="break1"></span> <span class="black" id="itemHealth"></span> <span class="black" id="itemDefense"></span> <span class="black" id="itemSpeed"></span> <span class="black" id="itemIntelligence"></span> <span class="black" id="itemTrueDefense"></span> <span class="black" id="itemMagicFind"></span> <span class="black" id="itemPetLuck"></span> <span class="black" id="break2"></span> <span class="black" id="itemDescription"></span> <span class="black" id="break3"></span> <div> <span class="black" id="itemNameA"></span> <span class="black" id="itemDescA"></span> <span class="black" id="itemCostA"></span> <span class="black" id="itemCooldownA"></span> </div> <span class="black" id="break4"></span> <div> <span class="black" id="itemNameB"></span> <span class="black" id="itemDescB"></span> <span class="black" id="itemCostB"></span> <span class="black" id="itemCooldownB"></span> </div> <span class="black" id="break5"></span> <div> <span class="black" id="itemNameC"></span> <span class="black" id="itemDescC"></span> <span class="black" id="itemCostC"></span> <span class="black" id="itemCooldownC"></span> </div> <span class="black" id="break6"></span> <span class="black" id="itemReforgeable"></span> <span class="black" id="recomb1"></span><span class="black" id="itemRarity"></span><span class="black" id="itemType"></span><span class="black" id="recomb2"></span> </div> <br><br> <h1>Java Code</h1> <div class="imgbord" id="itemDisplay"> <span class="black" id="javaCode" wrap="off">Complete the required fields to generate the java output<br></span> </div> <button class="button contents" style="width: 190px; text-align: center;" onclick="func.copyJavaCode();" id="copyJavaCode">Copy to Clipboard</button> <h1>Command Generator</h1> <div class="imgbord" id="itemDisplay"> <span class="black" id="commandGenerator">Lazy to code this, pretty sad.</span> </div> </body></html>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SkyblockRemastered Item Generator</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/minecraftia" type="text/css"/>
+    </head>
+    <body>
+
+        <script src="bundle.js" type="text/javascript"></script>
+        <script type = "text/javascript">
+            const func = new functions();
+            setInterval(function() { func.a(); func.b(); func.d(); func.e(); }, 50);
+        </script>
+
+        <div class="header">
+            <h1>Welcome to the SkyblockRemastered Item Generator</h1>
+            <h3>Fill out each value to generate items with an output of java, item display, and item code<br>You can use color codes for each text using & while following with the letter/number.<br>To line break, or to skip a line you can use \n</h3>
+        </div>
+        <div class="information">
+            <h2>Unicode/Symbols:</h2>
+            <p>Health - ❤<br>Defense - ❈<br>Strength - ❁<br>Speed - ✦<br>Crit Chance - ☣<br>Crit Damage - ☠<br>Intelligence - ✎<br>Sea Creature Chance - ∞<br>Magic Find - ✯<br>Pet Luck - ♣<br>Slayer - ☠<br>True Defense - ❂<br>Attack Speed - ​⚔</p>
+        </div>
+
+        <div>
+            <div class="itemInformation">
+                <h1>Item Information</h1>
+                <div class="mpnc">Item ID</div>
+                <input type="number" class="mcfield" id="itemIDField" placeholder="0" min="0"><br>
+                <div class="mpnc">Item Amount</div>
+                <input type="number" class="mcfield" id="itemAmountField" placeholder="1" min="1"><br>
+                <div class="mpnc">Item Name</div>
+                <input type="text" class="mcfield" id="itemNameField" placeholder="Name"><br>
+                <div class="mpnc">Item Description</div>
+                <input type="text" class="mcfield" id="itemDescriptionField" placeholder="Description"><br>
+                <div class="mpnc">Item Rarity</div>
+                <select type="text" class="mcin gray" id="itemRarityField" placeholder="0" value>
+                    <option value="0">Common</option>
+                    <option value="1">Uncommon</option>
+                    <option value="2">Rare</option>
+                    <option value="3">Epic</option>
+                    <option value="4">Legendary</option>
+                    <option value="5">Mythic</option>
+                    <option value="6">Special</option>
+                    <option value="7">Very Special</option>
+                    <option value="8">Celestial</option>
+                </select><br>
+                <div class="mpnc">Item Type</div>
+                <select type="text" class="mcin gray" id="itemTypeField" placeholder="0" value>
+                    <option value="0">Sword</option>
+                    <option value="1">Bow</option>
+                    <option value="2">Rod</option>
+                    <option value="3">Helmet</option>
+                    <option value="4">Chestplate</option>
+                    <option value="5">Leggings</option>
+                    <option value="6">Boots</option>
+                    <option value="7">Accessory</option>
+                    <option value="8">Pickaxe</option>
+                    <option value="9">Axe</option>
+                    <option value="10">Shovel</option>
+                    <option value="11">Hoe</option>
+                    <option value="12">Shears</option>
+                    <option value="13">Brewing Ingredient</option>
+                    <option value="14">Other</option>
+                </select><br><br>
+            </div>
+            <h1>Item Statistics</h1>
+            <div class="mpnc">Damage</div>
+            <input type="number" class="mcfield" id="itemDamageField" placeholder="0"><br>
+            <div class="mpnc">Strength</div>
+            <input type="number" class="mcfield" id="itemStrengthField" placeholder="0"><br>
+            <div class="mpnc">Crit Damage</div>
+            <input type="number" class="mcfield" id="itemCritDamageField" placeholder="0"><br>
+            <div class="mpnc">Crit Chance</div>
+            <input type="number" class="mcfield" id="itemCritChanceField" placeholder="0"><br>
+            <div class="mpnc">Attack Speed</div>
+            <input type="number" class="mcfield" id="itemAttackSpeedField" placeholder="0"><br>
+            <div class="mpnc">Sea Creature Chance</div>
+            <input type="number" class="mcfield" id="itemSeaCreatureChanceField" placeholder="0"><br>
+            <div class="mpnc">Health</div>
+            <input type="number" class="mcfield" id="itemHealthField" placeholder="0"><br>
+            <div class="mpnc">Defense</div>
+            <input type="number" class="mcfield" id="itemDefenseField" placeholder="0"><br>
+            <div class="mpnc">Speed</div>
+            <input type="number" class="mcfield" id="itemSpeedField" placeholder="0"><br>
+            <div class="mpnc">Intelligence</div>
+            <input type="number" class="mcfield" id="itemIntelligenceField" placeholder="0"><br>
+            <div class="mpnc">True Defense</div>
+            <input type="number" class="mcfield" id="itemTrueDefenseField" placeholder="0"><br>
+            <div class="mpnc">Magic Find</div>
+            <input type="number" class="mcfield" id="itemMagicFindField" placeholder="0"><br>
+            <div class="mpnc">Pet Luck</div>
+            <input type="number" class="mcfield" id="itemPetLuckField" placeholder="0"><br><br>
+            <label class="container mpnc">Reforgeable?
+                <input type="checkbox" id="isReforgeable">
+                <span class="checkmark"></span>
+            </label><br>
+            <label class="container mpnc">Recombobulated?
+                <input type="checkbox" id="isRecomb">
+                <span class="checkmark"></span>
+            </label>
+            <div class="abilityA">
+                <h1>Ability #1</h1>
+                <input type="text" class="mcfield" id="abilityNameA" placeholder="Ability Name"><br>
+                <input type="text" class="mcfield" id="abilityDescA" placeholder="Ability Description"><br>
+                <input type="number" class="mcfield" id="abilityCostA" placeholder="Ability Cost"><br>
+                <input type="number" class="mcfield" id="abilityCooldownA" placeholder="Ability Cooldown"><br>
+                <button class="button contents" style="width: 190px; text-align: center;" onclick="func.switchAbilityUsageA();" id="abilityUsageA">Item Ability</button>
+                <button class="button contents" style="width: 190px; text-align: center;" onclick="func.switchAbilityTypeA();" id="abilityTypeA">Right Click</button>
+            </div>
+            <div class="abilityB">
+                <h1>Ability #2</h1>
+                <input type="text" class="mcfield" id="abilityNameB" placeholder="Ability Name"><br>
+                <input type="text" class="mcfield" id="abilityDescB" placeholder="Ability Description"><br>
+                <input type="number" class="mcfield" id="abilityCostB" placeholder="Ability Cost"><br>
+                <input type="number" class="mcfield" id="abilityCooldownB" placeholder="Ability Cooldown"><br>
+                <button class="button contents" style="width: 190px; text-align: center;" onclick="func.switchAbilityUsageB();" id="abilityUsageB">Item Ability</button>
+                <button class="button contents" style="width: 190px; text-align: center;" onclick="func.switchAbilityTypeB();" id="abilityTypeB">Right Click</button>
+            </div>
+            <div class="abilityC">
+                <h1>Ability #3</h1>
+                <input type="text" class="mcfield" id="abilityNameC" placeholder="Ability Name"><br>
+                <input type="text" class="mcfield" id="abilityDescC" placeholder="Ability Description"><br>
+                <input type="number" class="mcfield" id="abilityCostC" placeholder="Ability Cost"><br>
+                <input type="number" class="mcfield" id="abilityCooldownC" placeholder="Ability Cooldown"><br>
+                <button class="button contents" style="width: 190px; text-align: center;" onclick="func.switchAbilityUsageC();" id="abilityUsageC">Item Ability</button>
+                <button class="button contents" style="width: 190px; text-align: center;" onclick="func.switchAbilityTypeC();" id="abilityTypeC">Right Click</button>
+            </div>
+        </div>
+        <br><h1>Item Display</h1>
+        <div class="imgbord" id="itemDisplay">
+            <span class="black" id="itemName"></span>
+            <span class="black" id="itemDamage"></span>
+            <span class="black" id="itemStrength"></span>
+            <span class="black" id="itemCritDamage"></span>
+            <span class="black" id="itemCritChance"></span>
+            <span class="black" id="itemAttackSpeed"></span>
+            <span class="black" id="itemSeaCreatureChance"></span>
+            <span class="black" id="break1"></span>
+            <span class="black" id="itemHealth"></span>
+            <span class="black" id="itemDefense"></span>
+            <span class="black" id="itemSpeed"></span>
+            <span class="black" id="itemIntelligence"></span>
+            <span class="black" id="itemTrueDefense"></span>
+            <span class="black" id="itemMagicFind"></span>
+            <span class="black" id="itemPetLuck"></span>
+            <span class="black" id="break2"></span>
+            <span class="black" id="itemDescription"></span>
+            <span class="black" id="break3"></span>
+            <div>
+                <span class="black" id="itemNameA"></span>
+                <span class="black" id="itemDescA"></span>
+                <span class="black" id="itemCostA"></span>
+                <span class="black" id="itemCooldownA"></span>
+            </div>
+            <span class="black" id="break4"></span>
+            <div>
+                <span class="black" id="itemNameB"></span>
+                <span class="black" id="itemDescB"></span>
+                <span class="black" id="itemCostB"></span>
+                <span class="black" id="itemCooldownB"></span>
+            </div>
+            <span class="black" id="break5"></span>
+            <div>
+                <span class="black" id="itemNameC"></span>
+                <span class="black" id="itemDescC"></span>
+                <span class="black" id="itemCostC"></span>
+                <span class="black" id="itemCooldownC"></span>
+            </div>
+            <span class="black" id="break6"></span>
+            <span class="black" id="itemReforgeable"></span>
+            <span class="black" id="recomb1"></span><span class="black" id="itemRarity"></span><span class="black" id="itemType"></span><span class="black" id="recomb2"></span>
+        </div>
+        <br><br>
+        <h1>Java Code</h1>
+        <div class="imgbord" id="itemDisplay">
+            <span class="black" id="javaCode" wrap="off">Complete the required fields to generate the java output<br></span>
+        </div>
+        <button class="button contents" style="width: 190px; text-align: center;" onclick="func.copyJavaCode();" id="copyJavaCode">Copy to Clipboard</button>
+        <h1>Command Generator</h1>
+        <div class="imgbord" id="itemDisplay">
+            <span class="black" id="commandGenerator">Lazy to code this, pretty sad.</span>
+        </div>
+        <span class="black" id="ignore-this"></span>
+    </body>
+</html>
