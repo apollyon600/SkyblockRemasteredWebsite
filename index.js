@@ -123,7 +123,7 @@ class FunctionStructure {
             
         let codeString = ``;
         if (material && itemName && displayName) {
-            codeString += `public ItemStack ${itemName} = Utils.addLore(new ItemStack(Material.${material.name.toUpperCase()}, `;
+            codeString += `public ItemStack ${itemName} = Utils.addLore(new ItemStack(Material.${material.name.toUpperCase()}), `;
         }
 
         if (displayName) codeString += `"${displayName}", `;
@@ -241,8 +241,8 @@ class FunctionStructure {
         let type = itemTypeField.options[itemTypeField.value].text.toUpperCase();
         let color = rarity == "common" ? "&f" : rarity == "uncommon" ? "&a" : rarity == "rare" ? "&9" : rarity == "epic" ? "&5" : rarity == "legendary" ? "&6" : rarity == "mythic" ? "&d" : rarity == "special" || rarity == "very special" ? "&c" : "&b";
 
-        if (isRecomb && rarity && type) codeString += `"${color}&k&la&r${color}&l ${rarity.toUpperCase()} ${type.toUpperCase() == "OTHER" ? "" : type.toUpperCase()} ${color}&l&ka&r"`
-        else codeString += `"${color}&l${rarity.toUpperCase()} ${type.toUpperCase()}"`
+        if (isRecomb && rarity && type) codeString += `"${color}&k&la&r${color}&l ${rarity.toUpperCase()}${type == "OTHER" ? "" : ` ${type}`} ${color}&l&ka&r"`;
+        else codeString += `"${color}&l${rarity.toUpperCase()}${type == "OTHER" ? "" : ` ${type}`}"`;
 
         codeString += `);`
 
