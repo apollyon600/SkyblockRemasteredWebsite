@@ -258,6 +258,41 @@ class FunctionStructure {
         setTimeout(function () { document.getElementById("copyJavaCode").innerHTML = "Copy to Clipboard"; }, 1000);
     }
 
+    toggleLightDarkMode() {
+        let check = document.getElementById("toggleLightDarkMode").innerHTML;
+        document.getElementById("toggleLightDarkMode").innerHTML = check.toLowerCase().includes("dark") ? "Switch to Light Mode" : "Switch to Dark Mode";
+    
+        // document.cookie = "theme=Dark Mode";
+        // console.log(func.getCookie("darkmode"))
+
+        if (check.toLowerCase().includes("dark")) {
+            // document.cookie = "theme=Dark Mode";
+            document.body.style.background = "#121212";
+            document.body.style.color = "#FFFFFF";
+        } else {
+            // document.cookie = "darkmode=false";
+            document.body.style.background = "#FFFFFF";
+            document.body.style.color = "#000000";
+        }
+
+    }
+
+    getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for(var i = 0; i <ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return "";
+    }
+
     copyToClipboard(text) {
         var input = document.body.appendChild(document.createElement("input"));
         input.value = text;
