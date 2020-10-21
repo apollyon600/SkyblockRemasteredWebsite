@@ -108,7 +108,7 @@ class FunctionStructure {
             .innerHTML; 
 
         let itemDescription = document.getElementById("itemDescriptionField")
-            .innerHTML;
+            .value;
         let isReforgeable = document.getElementById("isReforgeable")
             .checked;
         let isRecomb = document.getElementById("isRecomb")
@@ -189,6 +189,8 @@ class FunctionStructure {
         if (itemTrueDefense.length != 0) codeString += `"&7True Defense: &a+${itemTrueDefense}", `;
         if (itemMagicFind.length != 0) codeString += `"&7Magic Find: &a+${itemMagicFind}", `;
         if (itemPetLuck.length != 0) codeString += `"&7Pet Luck: &a+${itemPetLuck}", `;
+
+        if (itemDescription.length != 0) codeString += `${itemDescription}`;
 
         if (itemHealth.length != 0 ||
             itemDefense.length != 0 ||
@@ -548,6 +550,9 @@ class FunctionStructure {
             document.getElementById("itemPetLuck")
                 .innerHTML = "";
         }
+
+        let itemSlayerField = document.getElementById('itemSlayerField').value;
+        if (itemSlayerField) document.getElementById("itemSlayer").innerHTML = func.optimize(colors, itemSlayerField, true);
 
         if (itemHealth.length != 0 ||
             itemDefense.length != 0 ||
