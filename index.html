@@ -8,11 +8,6 @@
     <body>
 
         <script src="bundle.js" type="text/javascript"></script>
-        <script type = "text/javascript">
-            const func = new functions();
-            setInterval(function() { func.a(); func.b(); func.d(); func.e(); }, 50);
-        </script>
-
         <div class="header">
             <h1>Welcome to the SkyblockRemastered Item Generator</h1>
             <h3>Fill out each value to generate items with an output of java, item display, and item code<br>You can use color codes for each text using & while following with the letter/number.<br>To line break, or to skip a line you can use \n</h3>
@@ -35,9 +30,27 @@
                 <div class="mpnc">Item Description</div>
                 <input type="text" class="mcfield" id="itemDescriptionField" placeholder="Description"><br>
                 <div class="mpnc">Item Slayer</div>
-                <input type="text" class="mcfield" id="itemSlayerField" placeholder="☠ Requires Wolf Slayer ?"><br>
+                <select type="text" class="mcin2 gray" id="itemSlayerType" placeholder="0" value>
+                    <option value="0">None</option>
+                    <option value="1">Zombie</option>
+                    <option value="2">Spider</option>
+                    <option value="3">Wolf</option>
+                </select>
+                <select type="text" class="mcin2 gray" id="itemSlayerLevel" placeholder="0" value>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select><br>
                 <div class="mpnc">Item Rarity</div>
-                <select type="text" class="mcin gray" id="itemRarityField" placeholder="0" value>
+                <select type="text" class="mcin3 gray" id="itemRarityField" placeholder="0" value>
                     <option value="0">Common</option>
                     <option value="1">Uncommon</option>
                     <option value="2">Rare</option>
@@ -49,7 +62,7 @@
                     <option value="8">Celestial</option>
                 </select><br>
                 <div class="mpnc">Item Type</div>
-                <select type="text" class="mcin gray" id="itemTypeField" placeholder="0" value>
+                <select type="text" class="mcin3 gray" id="itemTypeField" placeholder="0" value>
                     <option value="0">Sword</option>
                     <option value="1">Bow</option>
                     <option value="2">Rod</option>
@@ -176,8 +189,8 @@
                 <span class="black" id="itemCooldownC"></span>
             </div>
             <span class="black" id="break6"></span>
-            <span class="black" id="itemSlayer"></span>
             <span class="black" id="itemReforgeable"></span>
+            <span class="black" id="itemSlayer"></span>
             <span class="black" id="recomb1"></span><span class="black" id="itemRarity"></span><span class="black" id="itemType"></span><span class="black" id="recomb2"></span>
         </div>
         <br><br>
@@ -191,5 +204,22 @@
             <span class="black" id="commandGenerator">Lazy to code this, pretty sad.</span>
         </div><br>
         <span class="black" id="ignore-this"></span>
+        <script type = "text/javascript">
+            const func = new functions();
+            setInterval(function() { func.a(); func.b(); func.d(); func.e(); }, 50);
+            // Loading up dark or light mode;
+            let check = document.getElementById("toggleLightDarkMode").innerHTML;
+                document.getElementById("toggleLightDarkMode").innerHTML = func.getCookie("theme").toLowerCase().includes("dark") || check.toLowerCase().includes("dark") ? "Switch to Light Mode" : "Switch to Dark Mode";
+
+            if (func.getCookie("theme").toLowerCase().includes("dark") || check.toLowerCase().includes("dark")) {
+                document.cookie = "theme=Dark Mode";
+                document.body.style.background = "#121212";
+                document.body.style.color = "#FFFFFF";
+            } else {
+                document.cookie = "theme=Light Mode";
+                document.body.style.background = "#FFFFFF";
+                document.body.style.color = "#000000";
+            }
+        </script>
     </body>
 </html>

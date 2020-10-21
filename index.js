@@ -120,13 +120,18 @@ class FunctionStructure {
             .innerHTML;
         let itemTypeField = document.getElementById("itemTypeField");
         let isRecipe = document.getElementById("isRecipe").checked;
+        let itemSlayerType = document.getElementById("itemSlayerType");
+        let itemSlayerLevel = document.getElementById("itemSlayerLevel");
+
+        let itemSlayer = itemSlayerType.options[itemSlayerType.value].text;
+        let itemLevel = itemSlayerLevel.options[itemSlayerLevel.value].text;
             
         let codeString = ``;
         if (material && itemName && displayName) {
             codeString += `public ItemStack ${itemName} = Utils.addLore(new ItemStack(Material.${material.name.toUpperCase()}), `;
         }
 
-        if (displayName) codeString += `"${displayName}", `;
+        if (displayName) codeString += `"${color}${displayName}", `;
 
         if (isRecipe) codeString += `"&eRight-click to view recipes!", `;
 
@@ -190,8 +195,6 @@ class FunctionStructure {
         if (itemMagicFind.length != 0) codeString += `"&7Magic Find: &a+${itemMagicFind}", `;
         if (itemPetLuck.length != 0) codeString += `"&7Pet Luck: &a+${itemPetLuck}", `;
 
-        if (itemDescription.length != 0) codeString += `${itemDescription}`;
-
         if (itemHealth.length != 0 ||
             itemDefense.length != 0 ||
             itemSpeed.length != 0 ||
@@ -232,13 +235,14 @@ class FunctionStructure {
             let lores = itemDescription.split("\\n");
             if (lores.length != 0) {
                 for (const lore in lores) {
-                    codeString += `"${lores[lore]}", `
+                    codeString += `"${lores[lore]}", `;
                 }
             }
         }
 
         if (isReforgeable) codeString += `"&8This item can be reforged!", `
 
+        if (itemSlayer && itemSlayer != "None" && itemLevel && itemLevel != "0") codeString += `"&4☠ &cRequires &5${itemSlayer} Slayer ${itemLevel}", `;
         let rarity = itemRarity.options[itemRarity.value].text.toLowerCase();
         let type = itemTypeField.options[itemTypeField.value].text.toUpperCase();
         let color = rarity == "common" ? "&f" : rarity == "uncommon" ? "&a" : rarity == "rare" ? "&9" : rarity == "epic" ? "&5" : rarity == "legendary" ? "&6" : rarity == "mythic" ? "&d" : rarity == "special" || rarity == "very special" ? "&c" : "&b";
@@ -262,21 +266,17 @@ class FunctionStructure {
 
     toggleLightDarkMode() {
         let check = document.getElementById("toggleLightDarkMode").innerHTML;
-        document.getElementById("toggleLightDarkMode").innerHTML = check.toLowerCase().includes("dark") ? "Switch to Light Mode" : "Switch to Dark Mode";
-    
-        // document.cookie = "theme=Dark Mode";
-        // console.log(func.getCookie("darkmode"))
+        document.getElementById("toggleLightDarkMode").innerHTML = func.getCookie("theme").toLowerCase().includes("dark") || check.toLowerCase().includes("dark") ? "Switch to Light Mode" : "Switch to Dark Mode";
 
-        if (check.toLowerCase().includes("dark")) {
-            // document.cookie = "theme=Dark Mode";
+        if (func.getCookie("theme").toLowerCase().includes("dark") || check.toLowerCase().includes("dark")) {
+            document.cookie = "theme=Dark Mode";
             document.body.style.background = "#121212";
             document.body.style.color = "#FFFFFF";
         } else {
-            // document.cookie = "darkmode=false";
+            document.cookie = "theme=Light Mode";
             document.body.style.background = "#FFFFFF";
             document.body.style.color = "#000000";
         }
-
     }
 
     getCookie(cname) {
@@ -551,8 +551,13 @@ class FunctionStructure {
                 .innerHTML = "";
         }
 
-        let itemSlayerField = document.getElementById('itemSlayerField').value;
-        if (itemSlayerField) document.getElementById("itemSlayer").innerHTML = func.optimize(colors, itemSlayerField, true);
+        let itemSlayerType = document.getElementById('itemSlayerType');
+        let itemLevelLevel = document.getElementById('itemSlayerLevel');
+
+        let itemSlayer = itemSlayerType.options[itemSlayerType.value].text;
+        let itemLevel = itemSlayerLevel.options[itemSlayerLevel.value].text;
+
+        if (itemSlayer && itemSlayer != "None" && itemLevel && itemLevel != "0") document.getElementById("itemSlayer").innerHTML = func.optimize(colors, `&4☠ &cRequires &5${itemSlayer} Slayer ${itemLevel}`, true);
 
         if (itemHealth.length != 0 ||
             itemDefense.length != 0 ||
