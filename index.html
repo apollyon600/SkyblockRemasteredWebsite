@@ -213,6 +213,8 @@
             let check = document.getElementById("toggleLightDarkMode").innerHTML;
                 document.getElementById("toggleLightDarkMode").innerHTML = func.getCookie("theme").toLowerCase().includes("dark") || check.toLowerCase().includes("dark") ? "Switch to Light Mode" : "Switch to Dark Mode";
 
+            if (!func.getCookie("theme")) document.cookie = "theme=Dark Mode";
+
             if (func.getCookie("theme").toLowerCase().includes("dark") || check.toLowerCase().includes("dark")) {
                 document.cookie = "theme=Dark Mode";
                 document.body.style.background = "#121212";

@@ -20,7 +20,7 @@ const colors = {
 };
 
 const types = ['Right Click', 'Sneak', 'Passive'];
-const ability = ['Item Ability', 'Full Set Bonus', 'Piece Bonus'];
+const ability = ['Item Ability', 'Full Set Bonus', 'Piece Bonus', 'Extra Bonus', "Orb Buff", "Held Item"];
 
 class FunctionStructure {
     constructor() {}
@@ -127,8 +127,8 @@ class FunctionStructure {
             codeString += `public ItemStack ${itemName} = Utils.addLore(new ItemStack(Material.${material.name.toUpperCase()}), `;
         }
 
-        let rarity = itemRarity.options[itemRarity.value].text.toLowerCase();
         let type = itemTypeField.options[itemTypeField.value].text.toUpperCase();
+        let rarity = itemRarity.options[itemRarity.value].text.toLowerCase();
         let color = rarity == "common" ? "&f" : rarity == "uncommon" ? "&a" : rarity == "rare" ? "&9" : rarity == "epic" ? "&5" : rarity == "legendary" ? "&6" : rarity == "mythic" ? "&d" : rarity == "special" || rarity == "very special" ? "&c" : "&b";
 
         if (displayName) codeString += `"${color}${displayName}", `;
@@ -816,7 +816,11 @@ class FunctionStructure {
         let abilityCostC = document.getElementById("abilityCostC");
         let abilityCooldownC = document.getElementById("abilityCooldownC");
 
-        if (abilityNameA.value.length != 0) itemNameA.innerHTML = func.optimize(colors, `&6${itemTypeA.innerHTML}: ${abilityNameA.value} &e${itemUsageA.innerHTML.toUpperCase() == "PASSIVE" ? "" : itemUsageA.innerHTML.toUpperCase()}`, false);
+        let itemRarity = document.getElementById("itemRarityField");
+        let rarity = itemRarity.options[itemRarity.value].text.toLowerCase();
+        let color = rarity == "common" ? "&f" : rarity == "uncommon" ? "&a" : rarity == "rare" ? "&9" : rarity == "epic" ? "&5" : rarity == "legendary" ? "&6" : rarity == "mythic" ? "&d" : rarity == "special" || rarity == "very special" ? "&c" : "&b";
+
+        if (abilityNameA.value.length != 0) itemNameA.innerHTML = func.optimize(colors, `&6${itemTypeA.innerHTML == "Orb Buff" ? `${color}Orb Buff` : itemTypeA.innerHTML}: ${abilityNameA.value} &e${itemUsageA.innerHTML.toUpperCase() == "PASSIVE" ? "" : itemUsageA.innerHTML.toUpperCase()}`, false);
         else itemNameA.innerHTML = "";
         if (abilityDescA.value.length != 0) itemDescA.innerHTML = func.optimize(colors, abilityDescA.value, true);
         else itemDescA.innerHTML = "";
@@ -831,7 +835,7 @@ class FunctionStructure {
             abilityCooldownA.value.length != 0) document.getElementById("break4").innerHTML = "<br>";
         else document.getElementById("break4").innerHTML = "";    
 
-        if (abilityNameB.value.length != 0) itemNameB.innerHTML = func.optimize(colors, `&6${itemTypeB.innerHTML}: ${abilityNameB.value} &e${itemUsageB.innerHTML.toUpperCase() == "PASSIVE" ? "" : itemUsageB.innerHTML.toUpperCase()}`, false);
+        if (abilityNameB.value.length != 0) itemNameB.innerHTML = func.optimize(colors, `&6${itemTypeB.innerHTML == "Orb Buff" ? `${color}Orb Buff` : itemTypeB.innerHTML}: ${abilityNameB.value} &e${itemUsageB.innerHTML.toUpperCase() == "PASSIVE" ? "" : itemUsageB.innerHTML.toUpperCase()}`, false);
         else itemNameB.innerHTML = "";
         if (abilityDescB.value.length != 0) itemDescB.innerHTML = func.optimize(colors, abilityDescB.value, true);
         else itemDescB.innerHTML = "";
@@ -846,7 +850,7 @@ class FunctionStructure {
             abilityCooldownB.value.length != 0) document.getElementById("break5").innerHTML = "<br>";
         else document.getElementById("break5").innerHTML = "";
 
-        if (abilityNameC.value.length != 0) itemNameC.innerHTML = func.optimize(colors, `&6${itemTypeC.innerHTML}: ${abilityNameC.value} &e${itemUsageC.innerHTML.toUpperCase() == "PASSIVE" ? "" : itemUsageC.innerHTML.toUpperCase()}`, false);
+        if (abilityNameC.value.length != 0) itemNameC.innerHTML = func.optimize(colors, `&6${itemTypeC.innerHTML == "Orb Buff" ? `${color}Orb Buff` : itemTypeC.innerHTML}: ${abilityNameC.value} &e${itemUsageC.innerHTML.toUpperCase() == "PASSIVE" ? "" : itemUsageC.innerHTML.toUpperCase()}`, false);
         else itemNameC.innerHTML = "";
         if (abilityDescC.value.length != 0) itemDescC.innerHTML = func.optimize(colors, abilityDescC.value, true);
         else itemDescC.innerHTML = "";
