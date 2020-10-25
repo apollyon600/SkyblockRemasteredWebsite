@@ -26,12 +26,8 @@ class FunctionStructure {
     constructor() {}
 
     e() {
-
-        // Lines for the initilization of the code. (Defining what material and name it is.)
         let material = items.items[document.getElementById("itemIDField")
             .value];
-        let amount = document.getElementById("itemAmountField")
-            .value || 1;
         let itemName = document.getElementById("itemName")
             .innerHTML.toUpperCase()
             .replace(/ +/g, "_")
