@@ -131,6 +131,10 @@ class FunctionStructure {
             codeString += `public ItemStack ${itemName} = Utils.addLore(new ItemStack(Material.${material.name.toUpperCase()}), `;
         }
 
+        let rarity = itemRarity.options[itemRarity.value].text.toLowerCase();
+        let type = itemTypeField.options[itemTypeField.value].text.toUpperCase();
+        let color = rarity == "common" ? "&f" : rarity == "uncommon" ? "&a" : rarity == "rare" ? "&9" : rarity == "epic" ? "&5" : rarity == "legendary" ? "&6" : rarity == "mythic" ? "&d" : rarity == "special" || rarity == "very special" ? "&c" : "&b";
+
         if (displayName) codeString += `"${color}${displayName}", `;
 
         if (isRecipe) codeString += `"&eRight-click to view recipes!", `;
@@ -243,9 +247,6 @@ class FunctionStructure {
         if (isReforgeable) codeString += `"&8This item can be reforged!", `
 
         if (itemSlayer && itemSlayer != "None" && itemLevel && itemLevel != "0") codeString += `"&4☠ &cRequires &5${itemSlayer} Slayer ${itemLevel}", `;
-        let rarity = itemRarity.options[itemRarity.value].text.toLowerCase();
-        let type = itemTypeField.options[itemTypeField.value].text.toUpperCase();
-        let color = rarity == "common" ? "&f" : rarity == "uncommon" ? "&a" : rarity == "rare" ? "&9" : rarity == "epic" ? "&5" : rarity == "legendary" ? "&6" : rarity == "mythic" ? "&d" : rarity == "special" || rarity == "very special" ? "&c" : "&b";
 
         if (isRecomb && rarity && type) codeString += `"${color}&k&la&r${color}&l ${rarity.toUpperCase()}${type == "OTHER" ? "" : ` ${type}`} ${color}&l&ka&r"`;
         else codeString += `"${color}&l${rarity.toUpperCase()}${type == "OTHER" ? "" : ` ${type}`}"`;
