@@ -28,8 +28,8 @@ class FunctionStructure {
     e() {
         let material = items.items[document.getElementById("itemIDField")
             .value];
-        let itemName = document.getElementById("itemName")
-            .innerHTML.toUpperCase()
+        let itemName = document.getElementById("itemNameField")
+            .value.toUpperCase()
             .replace(/ +/g, "_")
             .replace(/&[0-9a-zA-Z]/g, "")
             .replace(/<BR>/g, "");
@@ -247,16 +247,16 @@ class FunctionStructure {
         if (isRecomb && rarity && type) codeString += `"${color}&k&la&r${color}&l ${rarity.toUpperCase()}${type == "OTHER" ? "" : ` ${type}`} ${color}&l&ka&r"`;
         else codeString += `"${color}&l${rarity.toUpperCase()}${type == "OTHER" ? "" : ` ${type}`}"`;
 
-        codeString += `);`
+        codeString += `);`;
 
         if (codeString.length != 0) document.getElementById("javaCode")
             .innerHTML = codeString;
 
-        clipboardForJava = `\`\`\`java\n${codeString}\`\`\``;
+        clipboardForJava = `${codeString}`;
     }
 
     copyJavaCode() {
-        func.copyToClipboard(clipboardForJava.replace(/<br>/g, "\\n"));
+        func.copyToClipboard(clipboardForJava.replace(/<br>/g, `, " ", `));
         document.getElementById("copyJavaCode").innerHTML = "Copied!";
         setTimeout(function () { document.getElementById("copyJavaCode").innerHTML = "Copy to Clipboard"; }, 1000);
     }
@@ -303,6 +303,8 @@ class FunctionStructure {
 
     a() {
 
+        let itemRarity = document.getElementById("itemRarityField");
+
         let itemName = document.getElementById("itemNameField")
             .value;
 
@@ -310,7 +312,7 @@ class FunctionStructure {
             document.getElementById("itemName")
                 .style.visibility = 'visible';
             document.getElementById("itemName")
-                .innerHTML = func.optimize(colors, itemName, false);
+                .innerHTML = func.getColor(itemRarity.options[itemRarity.value].text.toLowerCase(), func.optimize(colors, itemName, false));
         } else {
             document.getElementById("itemName")
                 .style.visibility = 'hidden';
@@ -549,7 +551,6 @@ class FunctionStructure {
         }
 
         let itemSlayerType = document.getElementById('itemSlayerType');
-        let itemLevelLevel = document.getElementById('itemSlayerLevel');
 
         let itemSlayer = itemSlayerType.options[itemSlayerType.value].text;
         let itemLevel = itemSlayerLevel.options[itemSlayerLevel.value].text;
